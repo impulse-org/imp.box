@@ -22,6 +22,7 @@ public class TokenColorer extends TokenColorerBase implements BoxParsersym,
 		case TK_H:
 		case TK_V:
 		case TK_HOV:
+		case TK_HV:
 		case TK_I:
 		case TK_WD:
 			return keywordAttribute;

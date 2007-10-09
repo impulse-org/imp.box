@@ -1,14 +1,21 @@
 package org.eclipse.imp.box.builders;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.imp.box.Activator;
+import org.eclipse.imp.box.parser.BoxParseController;
+import org.eclipse.imp.builder.BuilderBase;
 import org.eclipse.imp.builder.BuilderUtils;
 import org.eclipse.imp.builder.MarkerCreator;
-import org.eclipse.imp.builder.BuilderBase;
 import org.eclipse.imp.language.Language;
 import org.eclipse.imp.language.LanguageRegistry;
 import org.eclipse.imp.model.ISourceProject;
@@ -16,9 +23,7 @@ import org.eclipse.imp.model.ModelFactory;
 import org.eclipse.imp.model.ModelFactory.ModelException;
 import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.runtime.PluginBase;
-
-import org.eclipse.imp.box.Activator;
-import org.eclipse.imp.box.parser.BoxParseController;
+import org.osgi.framework.Bundle;
 
 /**
  * @author
@@ -47,6 +52,18 @@ public class BoxBuilder extends BuilderBase {
 			.findLanguage(LANGUAGE_NAME);
 
 	public static final String[] EXTENSIONS = LANGUAGE.getFilenameExtensions();
+	
+	static {
+		Bundle bundle = Platform.getBundle(Activator.kPluginID);
+		URL url = bundle.getResource("Box.tbl");
+		try {
+			BoxParsetablePath = new File(FileLocator.toFileURL(url).getPath()).toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected static String BoxParsetablePath;
 
 	protected PluginBase getPlugin() {
 		//return BoxPlugin.getInstance();
@@ -127,19 +144,51 @@ public class BoxBuilder extends BuilderBase {
 
 			doRefresh(file.getParent());
 			
-			System.err.println("parsing Box with sglr:" + file.getFullPath());
-			Runtime.getRuntime().exec("/opt/meta/bin/sglr -v -p /home/jurgenv/imp/org.eclipse.imp.box/Box.tbl -i " + file.getFullPath() + " -o /tmp/Box.pt");
-			System.err.println("formatting and replacing term");
-			Runtime.getRuntime().exec("/opt/meta/bin/pandora -v -i /tmp/Box.pt -o " + file.getFullPath());
+			String absPath = file.getLocation().toOSString();
+			String temp = tempName().getAbsolutePath();
 			
+			String command = "sglr -i " + absPath + " -p " + BoxParsetablePath + " -o " + temp;
+		
+			Process parser = Runtime.getRuntime().exec(command);
+			parser.waitFor();
 			
+			if (parser.exitValue() != 0) {
+				System.err.println("Could not parse box expression");
+				return;
+			}
+			
+			String[] command2 = {"pandora", "-i", temp, "-o", absPath + ".fmt"};
+			System.err.println("Running command:" + command2);
+			
+			Process formatter = Runtime.getRuntime().exec(command2);
+			formatter.waitFor();
+			
+			if (formatter.exitValue() != 0) {
+				System.err.println("Could not format box term");
+				return;
+			}
+	
+			doRefresh(file);
 		} catch (Exception e) {
-			getPlugin().writeErrorMsg(e.getMessage());
+			System.err.println(e.getMessage());
 
 			e.printStackTrace();
 		}
 	}
 
+	File tempName() {
+		try {
+	        File temp = File.createTempFile("temp", ".pt");
+	        temp.deleteOnExit();
+	    
+	    
+	        return temp;
+	    } catch (IOException e) {
+	    	System.err.println("Could not generate tempfile.");
+	    	return null;
+	    }
+	}
+	
 	protected void runParserForCompiler(final IFile file,
 			IProgressMonitor monitor) {
 		try {
