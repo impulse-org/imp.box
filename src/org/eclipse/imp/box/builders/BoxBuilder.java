@@ -29,23 +29,12 @@ import org.osgi.framework.Bundle;
  * @author
  */
 public class BoxBuilder extends BuilderBase {
-	/**
-	 * Extension ID of the Box builder. Must match the ID in the corresponding
-	 * extension definition in plugin.xml.
-	 * SMS 22 Mar 2007:  If that ID is set through the NewBuilder wizard, then so must this one be.
-	 */
-	// SMS 28 Mar 2007:  Make plugin class name totally parameterized
 	public static final String BUILDER_ID = Activator.kPluginID
 			+ ".builder";
 
-	// SMS 28 Mar 2007:  Make problem id parameterized (rather than just ".problem") so that
-	// it can be given a builde-specific value (not simply composed here using the builder id
-	// because the problem id is also needed in ExtensionPointEnabler for adding the marker
-	// extension to the plugin.xml file)
 	public static final String PROBLEM_MARKER_ID = Activator.kPluginID
 			+ ".problem";
 
-	// SMS 11 May 2006
 	public static final String LANGUAGE_NAME = "Box";
 
 	public static final Language LANGUAGE = LanguageRegistry
@@ -66,7 +55,6 @@ public class BoxBuilder extends BuilderBase {
 	protected static String BoxParsetablePath;
 
 	protected PluginBase getPlugin() {
-		//return BoxPlugin.getInstance();
 		return Activator.getInstance();
 	}
 
@@ -82,9 +70,6 @@ public class BoxBuilder extends BuilderBase {
 		return PROBLEM_MARKER_ID;
 	}
 
-	// SMS 11 May 2006
-	// Incorporated realisitic handling of filename extensions
-	// using information recorded in the language registry
 	protected boolean isSourceFile(IFile file) {
 		IPath path = file.getRawLocation();
 		if (path == null)
@@ -108,10 +93,6 @@ public class BoxBuilder extends BuilderBase {
 	 * return true for the same file.
 	 */
 	protected boolean isNonRootSourceFile(IFile resource) {
-		// TODO:  If your language has non-root source files (e.g., header files), then
-		// reimplement this method to test for those
-		System.err
-				.println("BoxBuilder.isNonRootSourceFile(..) returning FALSE by default");
 		return false;
 	}
 
@@ -120,10 +101,6 @@ public class BoxBuilder extends BuilderBase {
 	 * them via calls to <code>fDependency.addDependency()</code>.
 	 */
 	protected void collectDependencies(IFile file) {
-		// TODO:  If your langauge has inter-file dependencies then reimplement
-		// this method to collect those
-		System.err
-				.println("BoxBuilder.collectDependencies(..) doing nothing by default");
 		return;
 	}
 
@@ -133,46 +110,40 @@ public class BoxBuilder extends BuilderBase {
 
 	protected void compile(final IFile file, IProgressMonitor monitor) {
 		try {
-			// START_HERE
-			System.out.println("Builder.compile with file = " + file.getName());
-			//BoxCompiler compiler= new BoxCompiler(PROBLEM_MARKER_ID);
-			//compiler.compile(file, monitor);
-			// Here we provide a substitute for the compile method that simply
-			// runs the parser in place of the compiler but creates problem
-			// markers for errors that will show up in the problems view
 			runParserForCompiler(file, monitor);
-
 			doRefresh(file.getParent());
 			
 			String absPath = file.getLocation().toOSString();
 			String temp = tempName().getAbsolutePath();
 			
-			String command = "sglr -i " + absPath + " -p " + BoxParsetablePath + " -o " + temp;
-		
-			Process parser = Runtime.getRuntime().exec(command);
-			parser.waitFor();
-			
-			if (parser.exitValue() != 0) {
-				System.err.println("Could not parse box expression");
-				return;
-			}
-			
-			String[] command2 = {"pandora", "-i", temp, "-o", absPath + ".fmt"};
-			System.err.println("Running command:" + command2);
-			
-			Process formatter = Runtime.getRuntime().exec(command2);
-			formatter.waitFor();
-			
-			if (formatter.exitValue() != 0) {
-				System.err.println("Could not format box term");
-				return;
-			}
+			parseBox(absPath, temp);
+			formatBox(temp, absPath + ".fmt");
 	
 			doRefresh(file);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 
 			e.printStackTrace();
+		}
+	}
+
+	private void formatBox(String input, String output) throws IOException, InterruptedException {
+		String command2 = "pandora -i " + input + " -o "+ output;
+		Process formatter = Runtime.getRuntime().exec(command2);
+		formatter.waitFor();
+		
+		if (formatter.exitValue() != 0) {
+			throw new RuntimeException("Box formatter failed with exit value: " + formatter.exitValue());
+		}
+	}
+
+	private void parseBox(String input, String output) throws IOException, InterruptedException {
+		String command = "sglr -i " + input + " -p " + BoxParsetablePath + " -o " + output;
+		Process parser = Runtime.getRuntime().exec(command);
+		parser.waitFor();
+		
+		if (parser.exitValue() != 0) {
+			throw new RuntimeException("Box parser failed with exit value:" + parser.exitValue());
 		}
 	}
 
