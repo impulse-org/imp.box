@@ -1,16 +1,12 @@
 package org.eclipse.imp.box.builders;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
+import java.io.FileOutputStream;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.imp.box.Activator;
 import org.eclipse.imp.box.parser.BoxParseController;
 import org.eclipse.imp.builder.BuilderBase;
@@ -23,7 +19,7 @@ import org.eclipse.imp.model.ModelFactory;
 import org.eclipse.imp.model.ModelFactory.ModelException;
 import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.runtime.PluginBase;
-import org.osgi.framework.Bundle;
+import org.eclipse.imp.utils.StreamUtils;
 
 /**
  * @author
@@ -42,18 +38,6 @@ public class BoxBuilder extends BuilderBase {
 
 	public static final String[] EXTENSIONS = LANGUAGE.getFilenameExtensions();
 	
-	static {
-		Bundle bundle = Platform.getBundle(Activator.kPluginID);
-		URL url = bundle.getResource("Box.tbl");
-		try {
-			BoxParsetablePath = new File(FileLocator.toFileURL(url).getPath()).toString();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	protected static String BoxParsetablePath;
-
 	protected PluginBase getPlugin() {
 		return Activator.getInstance();
 	}
@@ -114,10 +98,13 @@ public class BoxBuilder extends BuilderBase {
 			doRefresh(file.getParent());
 			
 			String absPath = file.getLocation().toOSString();
-			String temp = tempName().getAbsolutePath();
 			
-			parseBox(absPath, temp);
-			formatBox(temp, absPath + ".fmt");
+			System.err.println("formatting box");
+			String box = BoxFactory.box2text(StreamUtils.readStreamContents(file.getContents()));
+			System.err.println("done formatting box");
+			FileOutputStream out = new FileOutputStream(absPath + ".fmt");
+			out.write(box.getBytes());
+			out.close();
 	
 			doRefresh(file);
 		} catch (Exception e) {
@@ -127,39 +114,6 @@ public class BoxBuilder extends BuilderBase {
 		}
 	}
 
-	private void formatBox(String input, String output) throws IOException, InterruptedException {
-		String command2 = "pandora -i " + input + " -o "+ output;
-		Process formatter = Runtime.getRuntime().exec(command2);
-		formatter.waitFor();
-		
-		if (formatter.exitValue() != 0) {
-			throw new RuntimeException("Box formatter failed with exit value: " + formatter.exitValue());
-		}
-	}
-
-	private void parseBox(String input, String output) throws IOException, InterruptedException {
-		String command = "sglr -i " + input + " -p " + BoxParsetablePath + " -o " + output;
-		Process parser = Runtime.getRuntime().exec(command);
-		parser.waitFor();
-		
-		if (parser.exitValue() != 0) {
-			throw new RuntimeException("Box parser failed with exit value:" + parser.exitValue());
-		}
-	}
-
-	File tempName() {
-		try {
-	        File temp = File.createTempFile("temp", ".pt");
-	        temp.deleteOnExit();
-	    
-	    
-	        return temp;
-	    } catch (IOException e) {
-	    	System.err.println("Could not generate tempfile.");
-	    	return null;
-	    }
-	}
-	
 	protected void runParserForCompiler(final IFile file,
 			IProgressMonitor monitor) {
 		try {
