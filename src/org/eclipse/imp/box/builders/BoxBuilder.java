@@ -99,9 +99,7 @@ public class BoxBuilder extends BuilderBase {
 			
 			String absPath = file.getLocation().toOSString();
 			
-			System.err.println("formatting box");
 			String box = BoxFactory.box2text(StreamUtils.readStreamContents(file.getContents()));
-			System.err.println("done formatting box");
 			FileOutputStream out = new FileOutputStream(absPath + ".fmt");
 			out.write(box.getBytes());
 			out.close();
