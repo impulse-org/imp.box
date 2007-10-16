@@ -3,6 +3,8 @@ package org.eclipse.imp.box.builders;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -22,6 +24,13 @@ public class BoxFactory {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void connect(InputStream in, OutputStream out) throws IOException {
+		byte[] buffer = new byte[8192];
+		int amount;
+		while ((amount = in.read(buffer)) >= 0)
+			out.write(buffer, 0, amount);
 	}
 	
 	public static String box2text(String box) throws IOException, InterruptedException {
