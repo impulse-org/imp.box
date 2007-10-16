@@ -3,7 +3,6 @@ package org.eclipse.imp.box.builders;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -26,7 +25,6 @@ public class BoxFactory {
 	}
 	
 	public static String box2text(String box) throws IOException, InterruptedException {
-		System.err.println("box =" + box);
 		return formatBox(parseBox(box));
 	}
 	
@@ -59,8 +57,6 @@ public class BoxFactory {
 			throw new RuntimeException("Box parser failed with exit value:" + parser.exitValue());
 		}
 		
-		
-		System.err.println("tree " + output);
 		return output;
 	}
 }
