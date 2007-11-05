@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import lpg.runtime.IMessageHandler;
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.imp.model.ISourceProject;
@@ -31,20 +32,23 @@ public class BoxParseController extends SimpleLPGParseController implements
 
 	private boolean isKeyword[];
 
-	/**
-	 * @param filePath		Project-relative path of file
-	 * @param project		Project that contains the file
-	 * @param handler		A message handler to receive error messages (or any others)
-	 * 						from the parser
-	 */
-	public void initialize(IPath filePath, ISourceProject project,
-			IMessageHandler handler) {
+	public void initialize(IPath filePath, ISourceProject project, IMessageHandler handler) {
 		super.initialize(filePath, project, handler);
-		IPath fullFilePath = project.getRawProject().getLocation().append(
-				filePath);
-		createLexerAndParser(fullFilePath);
+		
+		IPath pathToUse;
+		IPath projLoc = project.getRawProject().getLocation();
+		
+		if (!filePath.isAbsolute()) {
+			pathToUse = projLoc.append(filePath);
+		}
+		else {
+			pathToUse = filePath;
+		}
+		
+		createLexerAndParser(pathToUse);
 
 		parser.setMessageHandler(handler);
+		
 	}
 
 	public IParser getParser() {
@@ -104,5 +108,7 @@ public class BoxParseController extends SimpleLPGParseController implements
 
 		return fCurrentAst;
 	}
+
+	
 
 }
