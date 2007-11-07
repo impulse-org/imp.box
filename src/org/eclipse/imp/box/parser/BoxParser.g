@@ -45,6 +45,7 @@
          | 'HV'  SpaceOptionList 
          | 'HOV' SpaceOptionList 
          | 'I' SpaceOptionList 
+         | 'G' GroupOptionList
          | 'WD'
 
    BoxList$$Box ::= %Empty
@@ -59,6 +60,13 @@
                  | 'ts'
                  
    SpaceOption ::= SpaceSymbol '=' NUMBER
+   
+   GroupOptionList$$GroupOption ::= %Empty
+                                 | GroupOptionList GroupOption
+                                 
+   GroupOption ::= 'op' BoxOperator
+                 | 'gs' NUMBER
+                 
                                               
 %End
 

@@ -43,6 +43,8 @@
         is
         vs
         hs
+        op
+        gs
 %End
 
 %Terminals
@@ -142,6 +144,20 @@
     Token ::= 'v' 's' 
         /.$BeginJava
                     makeToken($_vs);
+          $EndJava
+        ./
+   
+    
+    Token ::= 'o' 'p' 
+        /.$BeginJava
+                    makeToken($_op);
+          $EndJava
+        ./
+        
+    
+    Token ::= 'g' 's' 
+        /.$BeginJava
+                    makeToken($_gs);
           $EndJava
         ./
    
