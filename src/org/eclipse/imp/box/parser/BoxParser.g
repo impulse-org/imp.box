@@ -64,8 +64,8 @@
    GroupOptionList$$GroupOption ::= %Empty
                                  | GroupOptionList GroupOption
                                  
-   GroupOption ::= 'op' BoxOperator
-                 | 'gs' NUMBER
+   GroupOption ::= 'op' '='  BoxOperator
+                 | 'gs' '=' NUMBER
                  
                                               
 %End

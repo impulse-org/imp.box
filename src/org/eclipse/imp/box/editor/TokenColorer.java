@@ -25,6 +25,7 @@ public class TokenColorer extends TokenColorerBase implements BoxParsersym,
 		case TK_HV:
 		case TK_I:
 		case TK_WD:
+		case TK_G:
 			return keywordAttribute;
 		default:
 			return super.getColoring(controller, token);

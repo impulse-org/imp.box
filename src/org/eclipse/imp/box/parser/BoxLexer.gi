@@ -40,6 +40,7 @@
         HOV
         I
         WD
+        G
         is
         vs
         hs
@@ -164,6 +165,12 @@
     Token ::= 'W' 'D' 
         /.$BeginJava
                     makeToken($_WD);
+          $EndJava
+        ./
+        
+    Token ::= 'G'
+        /.$BeginJava
+                    makeToken($_G);
           $EndJava
         ./
 
