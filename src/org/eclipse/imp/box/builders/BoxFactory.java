@@ -1,21 +1,16 @@
 package org.eclipse.imp.box.builders;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import java.util.Calendar;
-
-import javax.swing.Box;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.imp.box.Activator;
 import org.eclipse.imp.box.parser.Ast.AbstractVisitor;
 import org.eclipse.imp.box.parser.Ast.Box0;
-import org.eclipse.imp.box.parser.Ast.BoxOperator0;
 import org.eclipse.imp.box.parser.Ast.IBox;
 import org.eclipse.imp.box.parser.Ast.Visitor;
 import org.eclipse.imp.utils.StreamUtils;
