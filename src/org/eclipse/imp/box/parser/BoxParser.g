@@ -1,5 +1,5 @@
 %options package=org.eclipse.imp.box.parser
-%options template=dtParserTemplate.gi
+%options template=dtParserTemplateF.gi
 %options import_terminals=BoxLexer.gi
 %options parent_saved,automatic_ast=toplevel,visitor=preorder,ast_directory=./Ast,ast_type=ASTNode
 --

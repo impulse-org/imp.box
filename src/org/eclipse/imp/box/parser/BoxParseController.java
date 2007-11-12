@@ -47,7 +47,8 @@ public class BoxParseController extends SimpleLPGParseController implements
 		
 		createLexerAndParser(pathToUse);
 
-		parser.setMessageHandler(handler);
+		parser.getParseStream().setMessageHandler(handler);
+		cacheKeywordsOnce();
 		
 	}
 
@@ -67,12 +68,8 @@ public class BoxParseController extends SimpleLPGParseController implements
 	}
 
 	private void createLexerAndParser(IPath filePath) {
-		try {
-			lexer = new BoxLexer(filePath.toOSString()); // Create the lexer
-			parser = new BoxParser(lexer.getLexStream() /*, project*/); // Create the parser
-		} catch (IOException e) {
-			throw new Error(e);
-		}
+			lexer = new BoxLexer(); // Create the lexer
+			parser = new BoxParser(lexer); // Create the parser
 	}
 
 	/**
@@ -83,19 +80,11 @@ public class BoxParseController extends SimpleLPGParseController implements
 		PMMonitor my_monitor = new PMMonitor(monitor);
 		char[] contentsArray = contents.toCharArray();
 
+		createLexerAndParser(fFilePath);  // TODO remove this sometime
 		lexer.initialize(contentsArray, fFilePath.toPortableString());
 		parser.getParseStream().resetTokenStream();
+		parser.getParseStream().setMessageHandler(handler);
 
-		// SMS 28 Mar 2007
-		// Commenting out to prevent clobbering of markers set by previous
-		// builders in the same build phase.  This will also give behavior
-		// that is more consistent with the handling of markers in the JDT.
-		//        IResource file = project.getFile(filePath);
-		//   	    try {
-		//        	file.deleteMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-		//        } catch(CoreException e) {
-		//        	System.err.println("BoxParseController.parse:  caught CoreException while deleting problem markers; continuing to parse regardless");
-		//        }
 
 		lexer.lexer(my_monitor, parser.getParseStream()); // Lex the stream to produce the token stream
 		if (my_monitor.isCancelled())
