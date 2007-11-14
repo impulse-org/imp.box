@@ -18,6 +18,8 @@ import org.osgi.framework.Bundle;
 
 public class BoxFactory {
 	private static String BoxParsetablePath;
+	private static String BoxParsetablePathReflexive;
+	private static String BoxFormatter;
 
 	/**
 	 * The external tools called by this class need some files that are stored
@@ -26,9 +28,16 @@ public class BoxFactory {
 	static {
 		Bundle bundle = Platform.getBundle(Activator.kPluginID);
 		URL url = bundle.getResource("Box.tbl");
+		URL urlReflexive = bundle.getResource("Box.trm.tbl");
+		URL formatterUrl = bundle.getResource("BoxFormatter");
+		
 		try {
 			BoxParsetablePath = new File(FileLocator.toFileURL(url).getPath())
 					.toString();
+			BoxParsetablePathReflexive = new File(FileLocator.toFileURL(urlReflexive).getPath())
+			.toString();
+			BoxFormatter = new File(FileLocator.toFileURL(formatterUrl).getPath()).toString();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -140,5 +149,49 @@ public class BoxFactory {
 		while ((count = in.read(buffer)) >= 0) {
 			out.write(buffer, 0, count);
 		}
+	}
+
+	public static String formatBox(String boxString) throws IOException, InterruptedException {
+		String sglr = "sglr -p " + BoxParsetablePathReflexive;
+		Process parser = Runtime.getRuntime().exec(sglr);
+		String boxFormat = BoxFormatter;
+		Process boxFormatter = Runtime.getRuntime().exec(boxFormat);
+		String pandora = "pandora";
+		Process formatter = Runtime.getRuntime().exec(pandora);
+		
+		
+		parser.getOutputStream().write(boxString.getBytes());
+		parser.getOutputStream().close();
+		parser.waitFor();
+		
+		pipe(parser.getInputStream(), boxFormatter.getOutputStream());
+        boxFormatter.getOutputStream().close();
+        boxFormatter.waitFor();
+        
+		pipe(boxFormatter.getInputStream(), formatter.getOutputStream());
+		formatter.getOutputStream().close();
+		formatter.waitFor();
+
+		String result = StreamUtils.readStreamContents(formatter
+				.getInputStream());
+
+		formatter.getInputStream().close();
+
+		if (parser.exitValue() != 0) {
+			throw new RuntimeException("Box parser failed with exit value:"
+					+ parser.exitValue());
+		}
+
+		if (boxFormatter.exitValue()  != 0) {
+			throw new RuntimeException("Box reflexive formatter failed with exit value:"
+					+ boxFormatter.exitValue());
+		}
+		
+		if (formatter.exitValue() != 0) {
+			throw new RuntimeException("Box formatter failed with exit value: "
+					+ formatter.exitValue());
+		}
+
+		return result;
 	}
 }
