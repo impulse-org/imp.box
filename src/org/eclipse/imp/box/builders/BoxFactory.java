@@ -27,9 +27,9 @@ public class BoxFactory {
 	 */
 	static {
 		Bundle bundle = Platform.getBundle(Activator.kPluginID);
-		URL url = bundle.getResource("Box.tbl");
-		URL urlReflexive = bundle.getResource("Box.trm.tbl");
-		URL formatterUrl = bundle.getResource("BoxFormatter");
+		URL url = bundle.getResource("resources/Box.tbl");
+		URL urlReflexive = bundle.getResource("resources/Box.trm.tbl");
+		URL formatterUrl = bundle.getResource("resources/BoxFormatter");
 		
 		try {
 			BoxParsetablePath = new File(FileLocator.toFileURL(url).getPath())

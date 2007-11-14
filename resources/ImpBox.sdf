@@ -1,0 +1,12 @@
+module ImpBox
+
+imports languages/box/syntax/Box
+
+exports
+
+context-free start-symbols
+  ImpBox
+
+context-free syntax
+ Box -> ImpBox {from-box}
+
