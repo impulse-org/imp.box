@@ -43,7 +43,6 @@ public class Activator extends PluginBase {
 
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-
 	}
 
 	public String getID() {

@@ -3,7 +3,6 @@ package org.eclipse.imp.box.builders;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -13,13 +12,12 @@ import org.eclipse.imp.box.parser.Ast.AbstractVisitor;
 import org.eclipse.imp.box.parser.Ast.Box0;
 import org.eclipse.imp.box.parser.Ast.IBox;
 import org.eclipse.imp.box.parser.Ast.Visitor;
-import org.eclipse.imp.utils.StreamUtils;
+import org.metaenvironment.eclipse.install.Tools;
 import org.osgi.framework.Bundle;
 
 public class BoxFactory {
 	private static String BoxParsetablePath;
 	private static String BoxParsetablePathReflexive;
-	private static String BoxFormatter;
 
 	/**
 	 * The external tools called by this class need some files that are stored
@@ -29,15 +27,12 @@ public class BoxFactory {
 		Bundle bundle = Platform.getBundle(Activator.kPluginID);
 		URL url = bundle.getResource("resources/Box.tbl");
 		URL urlReflexive = bundle.getResource("resources/Box.trm.tbl");
-		URL formatterUrl = bundle.getResource("resources/BoxFormatter");
 		
 		try {
 			BoxParsetablePath = new File(FileLocator.toFileURL(url).getPath())
 					.toString();
 			BoxParsetablePathReflexive = new File(FileLocator.toFileURL(urlReflexive).getPath())
 			.toString();
-			BoxFormatter = new File(FileLocator.toFileURL(formatterUrl).getPath()).toString();
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -104,94 +99,22 @@ public class BoxFactory {
 	public static String box2text(String boxString) throws IOException,
 			InterruptedException {
 		String sglr = "sglr -p " + BoxParsetablePath;
-		Process parser = Runtime.getRuntime().exec(sglr);
 		String pandora = "pandora";
-		Process formatter = Runtime.getRuntime().exec(pandora);
 
-		parser.getOutputStream().write(boxString.getBytes());
-		parser.getOutputStream().close();
-		parser.waitFor();
-
-		pipe(parser.getInputStream(), formatter.getOutputStream());
-		formatter.getOutputStream().close();
-		parser.getOutputStream().close();
-		formatter.waitFor();
-
-		String result = StreamUtils.readStreamContents(formatter
-				.getInputStream());
-		formatter.getInputStream().close();
-
-		if (parser.exitValue() != 0) {
-			throw new RuntimeException("Box parser failed with exit value:"
-					+ parser.exitValue());
-		}
-
-		if (formatter.exitValue() != 0) {
-			throw new RuntimeException("Box formatter failed with exit value: "
-					+ formatter.exitValue());
-		}
-
-		return result;
-	}
-
-	/**
-	 * A helper method that pipes an inputstream to an output stream using a
-	 * small intermediate buffer.
-	 * 
-	 * @param in
-	 * @param out
-	 * @throws IOException
-	 */
-	private static void pipe(InputStream in, OutputStream out)
-			throws IOException {
-		byte[] buffer = new byte[8192];
-		int count;
-		while ((count = in.read(buffer)) >= 0) {
-			out.write(buffer, 0, count);
-		}
+		InputStream input = Tools.cat(boxString);
+		InputStream output = Tools.pipeline(new String[] {sglr, pandora}, input);
+		
+		return Tools.uncat(output);
 	}
 
 	public static String formatBox(String boxString) throws IOException, InterruptedException {
 		String sglr = "sglr -p " + BoxParsetablePathReflexive;
-		Process parser = Runtime.getRuntime().exec(sglr);
-		String boxFormat = BoxFormatter;
-		Process boxFormatter = Runtime.getRuntime().exec(boxFormat);
+		String boxFormat = "BoxFormatter";
 		String pandora = "pandora";
-		Process formatter = Runtime.getRuntime().exec(pandora);
 		
+		InputStream input = Tools.cat(boxString);
+		InputStream output = Tools.pipeline(new String[] {sglr, boxFormat, pandora}, input);
 		
-		parser.getOutputStream().write(boxString.getBytes());
-		parser.getOutputStream().close();
-		parser.waitFor();
-		
-		pipe(parser.getInputStream(), boxFormatter.getOutputStream());
-        boxFormatter.getOutputStream().close();
-        boxFormatter.waitFor();
-        
-		pipe(boxFormatter.getInputStream(), formatter.getOutputStream());
-		formatter.getOutputStream().close();
-		formatter.waitFor();
-
-		String result = StreamUtils.readStreamContents(formatter
-				.getInputStream());
-
-		formatter.getInputStream().close();
-
-		if (parser.exitValue() != 0) {
-			throw new RuntimeException("Box parser failed with exit value:"
-					+ parser.exitValue());
-		}
-
-		if (boxFormatter.exitValue()  != 0) {
-			throw new RuntimeException("Box reflexive formatter failed with exit value:"
-					+ boxFormatter.exitValue());
-		}
-		
-		if (formatter.exitValue() != 0) {
-			throw new RuntimeException("Box formatter failed with exit value: "
-					+ formatter.exitValue());
-		}
-
-		return result;
+		return Tools.uncat(output);
 	}
 }
