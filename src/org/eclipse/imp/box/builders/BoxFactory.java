@@ -98,7 +98,7 @@ public class BoxFactory {
 	 */
 	public static String box2text(String boxString) throws IOException,
 			InterruptedException {
-		String sglr = "sglr -p " + BoxParsetablePath;
+		String sglr = "sglr -t -p " + BoxParsetablePath;
 		String pandora = "pandora";
 
 		InputStream input = Tools.cat(boxString);
