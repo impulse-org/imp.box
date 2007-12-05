@@ -1,8 +1,5 @@
 %options package=org.eclipse.imp.box.parser
 %options template=LexerTemplate.gi
---
--- This is just a sample lexer and not a real lexer for Box
---
 
 %Globals
     /.import java.util.*;
@@ -15,18 +12,10 @@
 %End
 
 %Include
-    LexerBasicMap.gi
+    LexerVeryBasicMap.gi
 %End
 
 %Export
-    --
-    -- List all the token types the lexer will directly process
-    -- and export to the parser. If a keyword lexer is used as
-    -- a filter for this lexer, it may export a set of keywords
-    -- that will also be passed along to the parser.
-    -- 
-    -- For example:
-    --
         SINGLE_LINE_COMMENT
         STRING
         EQUAL
@@ -46,6 +35,7 @@
         hs
         op
         gs
+        ts
 %End
 
 %Terminals
@@ -159,6 +149,12 @@
     Token ::= 'g' 's' 
         /.$BeginJava
                     makeToken($_gs);
+          $EndJava
+        ./
+   
+    Token ::= 't' 's' 
+        /.$BeginJava
+                    makeToken($_ts);
           $EndJava
         ./
    
