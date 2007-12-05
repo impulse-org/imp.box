@@ -17,6 +17,7 @@ import org.osgi.framework.Bundle;
 
 public class BoxFactory {
 	private static String BoxParsetablePath;
+
 	private static String BoxParsetablePathReflexive;
 
 	/**
@@ -27,12 +28,12 @@ public class BoxFactory {
 		Bundle bundle = Platform.getBundle(Activator.kPluginID);
 		URL url = bundle.getResource("resources/Box.tbl");
 		URL urlReflexive = bundle.getResource("resources/Box.trm.tbl");
-		
+
 		try {
 			BoxParsetablePath = new File(FileLocator.toFileURL(url).getPath())
 					.toString();
-			BoxParsetablePathReflexive = new File(FileLocator.toFileURL(urlReflexive).getPath())
-			.toString();
+			BoxParsetablePathReflexive = new File(FileLocator.toFileURL(
+					urlReflexive).getPath()).toString();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -56,7 +57,7 @@ public class BoxFactory {
 
 				public boolean visit(Box0 n) {
 					String lit = n.toString();
-					
+
 					buffer.append(unquote(lit));
 					buffer.append(' ');
 					return true;
@@ -64,9 +65,9 @@ public class BoxFactory {
 
 				private String unquote(String lit) {
 					if (lit.length() > 2) {
-					  return lit.substring(1, lit.length() - 1).replaceAll("\\n","\n").replaceAll("\\t","\t");
-					}
-					else {
+						return lit.substring(1, lit.length() - 1).replaceAll(
+								"\\n", "\n").replaceAll("\\t", "\t");
+					} else {
 						return "";
 					}
 				}
@@ -96,25 +97,34 @@ public class BoxFactory {
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	public static String box2text(String boxString) throws IOException,
-			InterruptedException {
-		String sglr = "sglr -t -p " + BoxParsetablePath;
+	public static String box2text(String boxString) throws BoxException {
+		String sglr = "sglr -p " + BoxParsetablePath;
 		String pandora = "pandora";
 
-		InputStream input = Tools.cat(boxString);
-		InputStream output = Tools.pipeline(new String[] {sglr, pandora}, input);
-		
-		return Tools.uncat(output);
+		try {
+			InputStream input = Tools.cat(boxString);
+			InputStream output = Tools.pipeline(new String[] { sglr, pandora },
+					input);
+			return Tools.uncat(output);
+		} catch (IOException e) {
+			throw new BoxException(
+					"IOException while formatting: " + boxString, e);
+		} catch (InterruptedException e) {
+			throw new BoxException("Formatting was interrupted: " + boxString,
+					e);
+		}
 	}
 
-	public static String formatBox(String boxString) throws IOException, InterruptedException {
+	public static String formatBox(String boxString) throws IOException,
+			InterruptedException {
 		String sglr = "sglr -p " + BoxParsetablePathReflexive;
 		String boxFormat = "BoxFormatter";
 		String pandora = "pandora";
-		
+
 		InputStream input = Tools.cat(boxString);
-		InputStream output = Tools.pipeline(new String[] {sglr, boxFormat, pandora}, input);
-		
+		InputStream output = Tools.pipeline(new String[] { sglr, boxFormat,
+				pandora }, input);
+
 		return Tools.uncat(output);
 	}
 }
