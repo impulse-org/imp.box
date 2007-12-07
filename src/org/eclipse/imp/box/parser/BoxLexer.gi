@@ -1,5 +1,5 @@
 %options package=org.eclipse.imp.box.parser
-%options template=LexerTemplate.gi
+%options template=NoKeywordsLexerTemplateF.gi
 
 %Globals
     /.import java.util.*;
@@ -12,7 +12,7 @@
 %End
 
 %Include
-    LexerVeryBasicMap.gi
+    NoKeywordsLexerMapF.gi
 %End
 
 %Export
