@@ -43,15 +43,17 @@ public class BoxParseController extends SimpleLPGParseController implements
 		char[] contentsArray = contents.toCharArray();
 
 		if (lexer == null) {
-			lexer = new BoxLexer();
+			lexer = new BoxLexer(contentsArray, fFilePath.toOSString());
+		} else {
+		    lexer.reset(contentsArray, fFilePath.toOSString());
 		}
-		lexer.reset(contentsArray, fFilePath.toOSString());
 		
 		if (parser == null) {
 			parser = new BoxParser(lexer.getLexStream());
+		} else {
+		    parser.reset(lexer.getLexStream());
 		}
 		
-		parser.reset(lexer.getLexStream());
 		parser.getParseStream().setMessageHandler(handler);
 
 		lexer.lexer(my_monitor, parser.getParseStream()); // Lex the stream to produce the token stream
