@@ -217,7 +217,17 @@
                     makeToken($_RIGHTBRACKET);
           $EndJava
         ./
+        
+    Token ::= id
+        /.$BeginJava
+                     makeToken($_IDENTIFIER);
+          $EndJava
+        ./
 
+    id ::= '$'
+         | id letter
+         | id digit
+         
     number ::= digit
              | number digit
 

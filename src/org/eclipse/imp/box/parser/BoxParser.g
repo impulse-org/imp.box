@@ -59,7 +59,10 @@
                  | 'is'
                  | 'ts'
                  
-   SpaceOption ::= SpaceSymbol '=' NUMBER
+   SpaceOption ::= SpaceSymbol '=' SpaceValue
+   
+   SpaceValue  ::= NUMBER
+                 | IDENTIFIER
    
    GroupOptionList$$GroupOption ::= %Empty
                                  | GroupOptionList GroupOption
