@@ -3,6 +3,7 @@ package org.eclipse.imp.box.editor;
 import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.services.ITokenColorer;
 import org.eclipse.imp.services.base.TokenColorerBase;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -17,7 +18,8 @@ public class TokenColorer extends TokenColorerBase implements BoxParsersym,
 	TextAttribute commentAttribute, keywordAttribute, stringAttribute,
 			numberAttribute, doubleAttribute, identifierAttribute;
 
-	public TextAttribute getColoring(IParseController controller, IToken token) {
+	public TextAttribute getColoring(IParseController controller, Object o) {
+	        IToken token= (IToken) o;
 		switch (token.getKind()) {
 		case TK_H:
 		case TK_V:
@@ -51,4 +53,7 @@ public class TokenColorer extends TokenColorerBase implements BoxParsersym,
 				.getSystemColor(SWT.COLOR_DARK_MAGENTA), null, SWT.BOLD);
 	}
 
+	public IRegion calculateDamageExtent(IRegion seed) {
+	    return seed;
+	}
 }
