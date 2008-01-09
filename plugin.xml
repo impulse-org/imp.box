@@ -71,7 +71,7 @@
          <action
                label="Enable Box Builder"
                tooltip="Enable the Box builder for this project"
-               class="Box.imp.actions.EnableNature"
+               class="org.eclipse.imp.box.EnableNature"
                id="Box.imp.actions.enableNatureAction">
          </action>
       </objectContribution>

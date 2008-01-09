@@ -12,9 +12,9 @@ import org.eclipse.imp.box.parser.Ast.AbstractVisitor;
 import org.eclipse.imp.box.parser.Ast.Box0;
 import org.eclipse.imp.box.parser.Ast.IBox;
 import org.eclipse.imp.box.parser.Ast.Visitor;
-import org.metaenvironment.eclipse.install.Tools;
 import org.osgi.framework.Bundle;
-
+import org.syntax_definition.sdf.Tools;
+       
 public class BoxFactory {
 	private static String BoxParsetablePath;
 
