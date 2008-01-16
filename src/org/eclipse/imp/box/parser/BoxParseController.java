@@ -19,20 +19,20 @@ public class BoxParseController extends SimpleLPGParseController implements
 
 	private BoxLexer lexer;
 
+        public BoxParseController() { }
+
 	public void initialize(IPath filePath, ISourceProject project, IMessageHandler handler) {
 		super.initialize(filePath, project, handler);
 	}
 
-	public IParser getParser() {
-		return parser;
-	}
-
+	@Override
 	public ILexer getLexer() {
-		return lexer;
+	    return lexer;
 	}
 
-
-	public BoxParseController() {
+	@Override
+	public IParser getParser() {
+	    return parser;
 	}
 
 	public Object parse(String contents, boolean scanOnly,
