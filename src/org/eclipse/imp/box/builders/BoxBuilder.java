@@ -1,6 +1,7 @@
 package org.eclipse.imp.box.builders;
 
 import java.io.FileOutputStream;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -36,8 +37,6 @@ public class BoxBuilder extends BuilderBase {
 	public static final Language LANGUAGE = LanguageRegistry
 			.findLanguage(LANGUAGE_NAME);
 
-	public static final String[] EXTENSIONS = LANGUAGE.getFilenameExtensions();
-	
 	protected PluginBase getPlugin() {
 		return Activator.getInstance();
 	}
@@ -63,11 +62,7 @@ public class BoxBuilder extends BuilderBase {
 		if (pathString.indexOf("/bin/") != -1)
 			return false;
 
-		for (int i = 0; i < EXTENSIONS.length; i++) {
-			if (EXTENSIONS[i].equals(path.getFileExtension()))
-				return true;
-		}
-		return false;
+		return LANGUAGE.hasExtension(path.getFileExtension());
 	}
 
 	/**
