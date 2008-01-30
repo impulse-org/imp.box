@@ -1,6 +1,7 @@
 package org.eclipse.imp.box;
 
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.imp.preferences.PreferencesService;
 import org.eclipse.imp.runtime.PluginBase;
 import org.osgi.framework.BundleContext;
@@ -56,10 +57,15 @@ public class Activator extends PluginBase {
 			preferencesService = new PreferencesService(ResourcesPlugin
 					.getWorkspace().getRoot().getProject());
 			preferencesService.setLanguageName(kLanguageName);
-			// TODO:  When some actual preferences are created, put
-			// a call to the preferences initializer here
-			// (The IMP New Preferences Support wizard creates such
-			// an initializer.)
+    		// To trigger the automatic invocation of the preferences initializer:
+    		try {
+    			new DefaultScope().getNode(kPluginID);
+    		} catch (Exception e) {
+    			// If this ever happens, it will probably be because the preferences
+    			// and their initializer haven't been defined yet.  In that situation
+    			// there's not really anything to do--you can't initialize preferences
+    			// that don't exist.  So swallow the exception and continue ...
+    		}
 
 		}
 		return preferencesService;
