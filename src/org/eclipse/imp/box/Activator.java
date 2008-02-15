@@ -29,11 +29,9 @@ public class Activator extends PluginBase {
 	protected static Activator sPlugin;
 
 	public static Activator getInstance() {
-		// SMS 11 Jul 2007
-		// Added conditional call to constructor in case the plugin
-		// class has not been auto-started
-		if (sPlugin == null)
+		if (sPlugin == null) {
 			new Activator();
+                }
 		return sPlugin;
 	}
 
