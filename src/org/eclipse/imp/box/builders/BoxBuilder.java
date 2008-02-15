@@ -1,7 +1,6 @@
 package org.eclipse.imp.box.builders;
 
 import java.io.FileOutputStream;
-import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
