@@ -98,7 +98,9 @@ public class BoxFactory {
 	 * @throws InterruptedException
 	 */
 	public static String box2text(String boxString) throws BoxException {
-		String sglr = "sglr -p " + BoxParsetablePath;
+                // RMF 2/20/2008 -t in the following puts sglr in text output mode,
+	        // which is currently required for this to work on Windows.
+		String sglr = "sglr -t -p " + BoxParsetablePath;
 		String pandora = "pandora";
 
 		try {
