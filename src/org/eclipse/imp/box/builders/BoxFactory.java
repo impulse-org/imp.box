@@ -100,7 +100,7 @@ public class BoxFactory {
 	public static String box2text(String boxString) throws BoxException {
                 // RMF 2/20/2008 -t in the following puts sglr in text output mode,
 	        // which is currently required for this to work on Windows.
-		String sglr = "sglr -t -p " + BoxParsetablePath;
+		String sglr = "sglr -p " + BoxParsetablePath;
 		String pandora = "pandora";
 
 		try {
