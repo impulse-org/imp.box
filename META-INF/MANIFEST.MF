@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Box Formatting Plug-in
+Bundle-Name: Box Formatting Plug-in (Incubation)
 Bundle-SymbolicName: org.eclipse.imp.box; singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: org.eclipse.imp.box.Activator
