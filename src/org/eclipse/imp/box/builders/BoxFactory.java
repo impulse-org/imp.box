@@ -110,9 +110,9 @@ public class BoxFactory {
 			return Tools.uncat(output);
 		} catch (IOException e) {
 			throw new BoxException(
-					"IOException while formatting: " + boxString, e);
+					"IOException while formatting", boxString, e);
 		} catch (InterruptedException e) {
-			throw new BoxException("Formatting was interrupted: " + boxString,
+			throw new BoxException("Formatting was interrupted", boxString,
 					e);
 		}
 	}
