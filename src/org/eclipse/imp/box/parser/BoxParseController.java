@@ -2,6 +2,7 @@ package org.eclipse.imp.box.parser;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.imp.box.Activator;
 import org.eclipse.imp.box.parser.Ast.ASTNode;
 import org.eclipse.imp.model.ISourceProject;
 import org.eclipse.imp.parser.ILexer;
@@ -19,7 +20,9 @@ public class BoxParseController extends SimpleLPGParseController implements
 
 	private BoxLexer lexer;
 
-        public BoxParseController() { }
+        public BoxParseController() {
+            super(Activator.kLanguageName);
+        }
 
 	public void initialize(IPath filePath, ISourceProject project, IMessageHandler handler) {
 		super.initialize(filePath, project, handler);
