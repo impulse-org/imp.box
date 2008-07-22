@@ -11,13 +11,13 @@
       </language>
    </extension>
    <extension
-         id="org.eclipse.imp.box.parserWrapper"
+         id="org.eclipse.imp.box.parser"
          name="Box Parser Wrapper"
          point="org.eclipse.imp.runtime.parser">
-      <parserWrapper
+      <parser
             class="org.eclipse.imp.box.parser.BoxParseController"
             language="Box">
-      </parserWrapper>
+      </parser>
    </extension>
    <extension
          point="org.eclipse.imp.runtime.tokenColorer">
