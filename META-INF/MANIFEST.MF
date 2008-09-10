@@ -21,3 +21,4 @@ Eclipse-LazyStart: true
 Export-Package: org.eclipse.imp.box.builders,
  org.eclipse.imp.box.parser,
  org.eclipse.imp.box.parser.Ast
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
