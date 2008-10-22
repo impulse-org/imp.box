@@ -1,3 +1,13 @@
+/*******************************************************************************
+* Copyright (c) 2008 IBM Corporation.
+* All rights reserved. This program and the accompanying materials
+* are made available under the terms of the Eclipse Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+* Contributors:
+*    Jurgen Vinju (jurgen@vinju.org) - initial API and implementation
+*******************************************************************************/
 package org.eclipse.imp.box;
 
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -6,26 +16,12 @@ import org.eclipse.imp.preferences.PreferencesService;
 import org.eclipse.imp.runtime.PluginBase;
 import org.osgi.framework.BundleContext;
 
-/*
- * SMS 27 Mar 2007:  Deleted creation of preferences cache (now obsolete)
- * SMS 28 Mar 2007:
- * 	- Plugin class name now totally parameterized
- *  - Plugin package made a separate parameter
- * SMS 19 Jun 2007:
- * 	- Added kLanguageName (may be used by later updates to the template)
- * 	- Added field and method related to new preferences service; deleted
- *	  code for initializing preference store from start(..) method
- */
-
 public class Activator extends PluginBase {
 
 	public static final String kPluginID = "org.eclipse.imp.box";
 
 	public static final String kLanguageName = "Box";
 
-	/**
-	 * The unique instance of this plugin class
-	 */
 	protected static Activator sPlugin;
 
 	public static Activator getInstance() {
