@@ -44,24 +44,8 @@ public class Activator extends PluginBase {
 		return kPluginID;
 	}
 
-	protected static PreferencesService preferencesService = null;
-
-	public static PreferencesService getPreferencesService() {
-		if (preferencesService == null) {
-			preferencesService = new PreferencesService(ResourcesPlugin
-					.getWorkspace().getRoot().getProject());
-			preferencesService.setLanguageName(kLanguageName);
-    		// To trigger the automatic invocation of the preferences initializer:
-    		try {
-    			new DefaultScope().getNode(kPluginID);
-    		} catch (Exception e) {
-    			// If this ever happens, it will probably be because the preferences
-    			// and their initializer haven't been defined yet.  In that situation
-    			// there's not really anything to do--you can't initialize preferences
-    			// that don't exist.  So swallow the exception and continue ...
-    		}
-
-		}
-		return preferencesService;
+	@Override
+	public String getLanguageID() {
+	    return kLanguageName;
 	}
 }
