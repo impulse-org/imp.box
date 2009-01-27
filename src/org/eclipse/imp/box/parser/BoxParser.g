@@ -64,7 +64,7 @@
    SpaceOption ::= SpaceSymbol '=' SpaceValue
    
    SpaceValue  ::= NUMBER
-                 | IDENTIFIER
+                 | IDENT
    
    GroupOptionList$$GroupOption ::= %Empty
                                  | GroupOptionList GroupOption

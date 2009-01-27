@@ -8,7 +8,7 @@
 --    Jurgen Vinju (jurgen@vinju.org) - initial API and implementation
 
 %options package=org.eclipse.imp.box.parser
-%options template=NoKeywordsLexerTemplateF.gi
+%options template=LexerTemplateF.gi
 
 %Globals
     /.import java.util.*;
@@ -21,30 +21,30 @@
 %End
 
 %Include
-    NoKeywordsLexerMapF.gi
+    LexerVeryBasicMapF.gi
 %End
 
 %Export
-        SINGLE_LINE_COMMENT
-        STRING
-        EQUAL
-        LEFTBRACKET
-        RIGHTBRACKET
-        NUMBER
-        IDENTIFIER
-        H 
-        V
-        HV
-        HOV
-        I
-        WD
-        G
-        is
-        vs
-        hs
-        op
-        gs
-        ts
+    SINGLE_LINE_COMMENT
+    STRING
+    EQUAL
+    LEFTBRACKET
+    RIGHTBRACKET
+    NUMBER
+    IDENT
+    H 
+    V
+    HV
+    HOV
+    I
+    WD
+    G
+    is
+    vs
+    hs
+    op
+    gs
+    ts
 %End
 
 %Terminals
@@ -229,7 +229,7 @@
         
     Token ::= id
         /.$BeginJava
-                     makeToken($_IDENTIFIER);
+                     makeToken($_IDENT);
           $EndJava
         ./
 
