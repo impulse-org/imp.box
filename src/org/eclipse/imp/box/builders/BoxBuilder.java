@@ -150,7 +150,7 @@ public class BoxBuilder extends BuilderBase {
 			String contents = BuilderUtils.getFileContents(file);
 
 			// Finally parse it
-			parseController.parse(contents, false, monitor);
+			parseController.parse(contents, monitor);
 
 			doRefresh(file.getParent());
 		} catch (Exception e) {
