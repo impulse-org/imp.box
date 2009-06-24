@@ -4,8 +4,8 @@ Bundle-Name: Box Formatting Plug-in (Incubation)
 Bundle-SymbolicName: org.eclipse.imp.box; singleton:=true
 Bundle-Version: 0.1.13
 Bundle-Activator: org.eclipse.imp.box.Activator
+Bundle-ActivationPolicy: lazy
 Bundle-Vendor: jurgen.vinju@gmail.com
-Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
@@ -16,7 +16,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.imp.smapifier,
  org.eclipse.compare,
  sdf_eclipse_installer
-Eclipse-LazyStart: true
 Export-Package: org.eclipse.imp.box.builders,
  org.eclipse.imp.box.parser,
  org.eclipse.imp.box.parser.Ast
