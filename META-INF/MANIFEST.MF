@@ -14,7 +14,6 @@ Require-Bundle: org.eclipse.ui,
  lpg.runtime,
  org.eclipse.jface.text,
  org.eclipse.jdt.core,
- org.eclipse.imp.smapifier,
  org.eclipse.compare,
  sdf_eclipse_installer,
  org.eclipse.ui.workbench.texteditor;bundle-version="3.3.0"
