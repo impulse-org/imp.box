@@ -23,10 +23,10 @@
 %End
 
 %Terminals
-         NUMBER
-         RIGHTBRACKET ::= ']'
-         LEFTBRACKET ::= '['
-         EQUAL ::= '='
+	NUMBER
+	RIGHTBRACKET ::= ']'
+	LEFTBRACKET ::= '['
+	EQUAL ::= '='
 %End
 
 %Start
@@ -39,8 +39,8 @@
 %Rules
 
    Box ::= STRING
-         | BoxOperator '[' BoxList ']'
-         
+         | BoxOperator '['$ BoxList ']'$
+
    BoxOperator ::=
          | 'H' SpaceOptionList
          | 'V' SpaceOptionList 
@@ -52,28 +52,24 @@
 
    BoxList$$Box ::= %Empty
                 | BoxList Box
-                
+
    SpaceOptionList$$SpaceOption ::= %Empty
                                  | SpaceOptionList SpaceOption
-    
+
    SpaceSymbol ::= 'vs'
                  | 'hs'
                  | 'is'
                  | 'ts'
-                 
-   SpaceOption ::= SpaceSymbol '=' SpaceValue
-   
+
+   SpaceOption ::= SpaceSymbol '='$ SpaceValue
+
    SpaceValue  ::= NUMBER
                  | IDENT
-   
+
    GroupOptionList$$GroupOption ::= %Empty
                                  | GroupOptionList GroupOption
-                                 
-   GroupOption ::= 'op' '='  BoxOperator
-                 | 'gs' '=' NUMBER
-                 
-                                              
-%End
 
-%Headers
-        
+   GroupOption ::= 'op' '='$ BoxOperator
+                 | 'gs' '='$ NUMBER
+
+%End

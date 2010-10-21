@@ -24,56 +24,56 @@ public interface Visitor extends IAstVisitor
     boolean visit(GroupOptionList n);
     void endVisit(GroupOptionList n);
 
-    boolean visit(Box0 n);
-    void endVisit(Box0 n);
+    boolean visit(Box__STRING n);
+    void endVisit(Box__STRING n);
 
-    boolean visit(Box1 n);
-    void endVisit(Box1 n);
+    boolean visit(Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET n);
+    void endVisit(Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET n);
 
-    boolean visit(BoxOperator0 n);
-    void endVisit(BoxOperator0 n);
+    boolean visit(BoxOperator__H_SpaceOptionList n);
+    void endVisit(BoxOperator__H_SpaceOptionList n);
 
-    boolean visit(BoxOperator1 n);
-    void endVisit(BoxOperator1 n);
+    boolean visit(BoxOperator__V_SpaceOptionList n);
+    void endVisit(BoxOperator__V_SpaceOptionList n);
 
-    boolean visit(BoxOperator2 n);
-    void endVisit(BoxOperator2 n);
+    boolean visit(BoxOperator__HV_SpaceOptionList n);
+    void endVisit(BoxOperator__HV_SpaceOptionList n);
 
-    boolean visit(BoxOperator3 n);
-    void endVisit(BoxOperator3 n);
+    boolean visit(BoxOperator__HOV_SpaceOptionList n);
+    void endVisit(BoxOperator__HOV_SpaceOptionList n);
 
-    boolean visit(BoxOperator4 n);
-    void endVisit(BoxOperator4 n);
+    boolean visit(BoxOperator__I_SpaceOptionList n);
+    void endVisit(BoxOperator__I_SpaceOptionList n);
 
-    boolean visit(BoxOperator5 n);
-    void endVisit(BoxOperator5 n);
+    boolean visit(BoxOperator__G_GroupOptionList n);
+    void endVisit(BoxOperator__G_GroupOptionList n);
 
-    boolean visit(BoxOperator6 n);
-    void endVisit(BoxOperator6 n);
+    boolean visit(BoxOperator__WD n);
+    void endVisit(BoxOperator__WD n);
 
-    boolean visit(SpaceSymbol0 n);
-    void endVisit(SpaceSymbol0 n);
+    boolean visit(SpaceSymbol__vs n);
+    void endVisit(SpaceSymbol__vs n);
 
-    boolean visit(SpaceSymbol1 n);
-    void endVisit(SpaceSymbol1 n);
+    boolean visit(SpaceSymbol__hs n);
+    void endVisit(SpaceSymbol__hs n);
 
-    boolean visit(SpaceSymbol2 n);
-    void endVisit(SpaceSymbol2 n);
+    boolean visit(SpaceSymbol__is n);
+    void endVisit(SpaceSymbol__is n);
 
-    boolean visit(SpaceSymbol3 n);
-    void endVisit(SpaceSymbol3 n);
+    boolean visit(SpaceSymbol__ts n);
+    void endVisit(SpaceSymbol__ts n);
 
-    boolean visit(SpaceValue0 n);
-    void endVisit(SpaceValue0 n);
+    boolean visit(SpaceValue__NUMBER n);
+    void endVisit(SpaceValue__NUMBER n);
 
-    boolean visit(SpaceValue1 n);
-    void endVisit(SpaceValue1 n);
+    boolean visit(SpaceValue__IDENT n);
+    void endVisit(SpaceValue__IDENT n);
 
-    boolean visit(GroupOption0 n);
-    void endVisit(GroupOption0 n);
+    boolean visit(GroupOption__op_EQUAL_BoxOperator n);
+    void endVisit(GroupOption__op_EQUAL_BoxOperator n);
 
-    boolean visit(GroupOption1 n);
-    void endVisit(GroupOption1 n);
+    boolean visit(GroupOption__gs_EQUAL_NUMBER n);
+    void endVisit(GroupOption__gs_EQUAL_NUMBER n);
 
 }
 

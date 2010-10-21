@@ -27,56 +27,56 @@ public abstract class AbstractVisitor implements Visitor
     public boolean visit(GroupOptionList n) { unimplementedVisitor("visit(GroupOptionList)"); return true; }
     public void endVisit(GroupOptionList n) { unimplementedVisitor("endVisit(GroupOptionList)"); }
 
-    public boolean visit(Box0 n) { unimplementedVisitor("visit(Box0)"); return true; }
-    public void endVisit(Box0 n) { unimplementedVisitor("endVisit(Box0)"); }
+    public boolean visit(Box__STRING n) { unimplementedVisitor("visit(Box__STRING)"); return true; }
+    public void endVisit(Box__STRING n) { unimplementedVisitor("endVisit(Box__STRING)"); }
 
-    public boolean visit(Box1 n) { unimplementedVisitor("visit(Box1)"); return true; }
-    public void endVisit(Box1 n) { unimplementedVisitor("endVisit(Box1)"); }
+    public boolean visit(Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET n) { unimplementedVisitor("visit(Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET)"); return true; }
+    public void endVisit(Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET n) { unimplementedVisitor("endVisit(Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET)"); }
 
-    public boolean visit(BoxOperator0 n) { unimplementedVisitor("visit(BoxOperator0)"); return true; }
-    public void endVisit(BoxOperator0 n) { unimplementedVisitor("endVisit(BoxOperator0)"); }
+    public boolean visit(BoxOperator__H_SpaceOptionList n) { unimplementedVisitor("visit(BoxOperator__H_SpaceOptionList)"); return true; }
+    public void endVisit(BoxOperator__H_SpaceOptionList n) { unimplementedVisitor("endVisit(BoxOperator__H_SpaceOptionList)"); }
 
-    public boolean visit(BoxOperator1 n) { unimplementedVisitor("visit(BoxOperator1)"); return true; }
-    public void endVisit(BoxOperator1 n) { unimplementedVisitor("endVisit(BoxOperator1)"); }
+    public boolean visit(BoxOperator__V_SpaceOptionList n) { unimplementedVisitor("visit(BoxOperator__V_SpaceOptionList)"); return true; }
+    public void endVisit(BoxOperator__V_SpaceOptionList n) { unimplementedVisitor("endVisit(BoxOperator__V_SpaceOptionList)"); }
 
-    public boolean visit(BoxOperator2 n) { unimplementedVisitor("visit(BoxOperator2)"); return true; }
-    public void endVisit(BoxOperator2 n) { unimplementedVisitor("endVisit(BoxOperator2)"); }
+    public boolean visit(BoxOperator__HV_SpaceOptionList n) { unimplementedVisitor("visit(BoxOperator__HV_SpaceOptionList)"); return true; }
+    public void endVisit(BoxOperator__HV_SpaceOptionList n) { unimplementedVisitor("endVisit(BoxOperator__HV_SpaceOptionList)"); }
 
-    public boolean visit(BoxOperator3 n) { unimplementedVisitor("visit(BoxOperator3)"); return true; }
-    public void endVisit(BoxOperator3 n) { unimplementedVisitor("endVisit(BoxOperator3)"); }
+    public boolean visit(BoxOperator__HOV_SpaceOptionList n) { unimplementedVisitor("visit(BoxOperator__HOV_SpaceOptionList)"); return true; }
+    public void endVisit(BoxOperator__HOV_SpaceOptionList n) { unimplementedVisitor("endVisit(BoxOperator__HOV_SpaceOptionList)"); }
 
-    public boolean visit(BoxOperator4 n) { unimplementedVisitor("visit(BoxOperator4)"); return true; }
-    public void endVisit(BoxOperator4 n) { unimplementedVisitor("endVisit(BoxOperator4)"); }
+    public boolean visit(BoxOperator__I_SpaceOptionList n) { unimplementedVisitor("visit(BoxOperator__I_SpaceOptionList)"); return true; }
+    public void endVisit(BoxOperator__I_SpaceOptionList n) { unimplementedVisitor("endVisit(BoxOperator__I_SpaceOptionList)"); }
 
-    public boolean visit(BoxOperator5 n) { unimplementedVisitor("visit(BoxOperator5)"); return true; }
-    public void endVisit(BoxOperator5 n) { unimplementedVisitor("endVisit(BoxOperator5)"); }
+    public boolean visit(BoxOperator__G_GroupOptionList n) { unimplementedVisitor("visit(BoxOperator__G_GroupOptionList)"); return true; }
+    public void endVisit(BoxOperator__G_GroupOptionList n) { unimplementedVisitor("endVisit(BoxOperator__G_GroupOptionList)"); }
 
-    public boolean visit(BoxOperator6 n) { unimplementedVisitor("visit(BoxOperator6)"); return true; }
-    public void endVisit(BoxOperator6 n) { unimplementedVisitor("endVisit(BoxOperator6)"); }
+    public boolean visit(BoxOperator__WD n) { unimplementedVisitor("visit(BoxOperator__WD)"); return true; }
+    public void endVisit(BoxOperator__WD n) { unimplementedVisitor("endVisit(BoxOperator__WD)"); }
 
-    public boolean visit(SpaceSymbol0 n) { unimplementedVisitor("visit(SpaceSymbol0)"); return true; }
-    public void endVisit(SpaceSymbol0 n) { unimplementedVisitor("endVisit(SpaceSymbol0)"); }
+    public boolean visit(SpaceSymbol__vs n) { unimplementedVisitor("visit(SpaceSymbol__vs)"); return true; }
+    public void endVisit(SpaceSymbol__vs n) { unimplementedVisitor("endVisit(SpaceSymbol__vs)"); }
 
-    public boolean visit(SpaceSymbol1 n) { unimplementedVisitor("visit(SpaceSymbol1)"); return true; }
-    public void endVisit(SpaceSymbol1 n) { unimplementedVisitor("endVisit(SpaceSymbol1)"); }
+    public boolean visit(SpaceSymbol__hs n) { unimplementedVisitor("visit(SpaceSymbol__hs)"); return true; }
+    public void endVisit(SpaceSymbol__hs n) { unimplementedVisitor("endVisit(SpaceSymbol__hs)"); }
 
-    public boolean visit(SpaceSymbol2 n) { unimplementedVisitor("visit(SpaceSymbol2)"); return true; }
-    public void endVisit(SpaceSymbol2 n) { unimplementedVisitor("endVisit(SpaceSymbol2)"); }
+    public boolean visit(SpaceSymbol__is n) { unimplementedVisitor("visit(SpaceSymbol__is)"); return true; }
+    public void endVisit(SpaceSymbol__is n) { unimplementedVisitor("endVisit(SpaceSymbol__is)"); }
 
-    public boolean visit(SpaceSymbol3 n) { unimplementedVisitor("visit(SpaceSymbol3)"); return true; }
-    public void endVisit(SpaceSymbol3 n) { unimplementedVisitor("endVisit(SpaceSymbol3)"); }
+    public boolean visit(SpaceSymbol__ts n) { unimplementedVisitor("visit(SpaceSymbol__ts)"); return true; }
+    public void endVisit(SpaceSymbol__ts n) { unimplementedVisitor("endVisit(SpaceSymbol__ts)"); }
 
-    public boolean visit(SpaceValue0 n) { unimplementedVisitor("visit(SpaceValue0)"); return true; }
-    public void endVisit(SpaceValue0 n) { unimplementedVisitor("endVisit(SpaceValue0)"); }
+    public boolean visit(SpaceValue__NUMBER n) { unimplementedVisitor("visit(SpaceValue__NUMBER)"); return true; }
+    public void endVisit(SpaceValue__NUMBER n) { unimplementedVisitor("endVisit(SpaceValue__NUMBER)"); }
 
-    public boolean visit(SpaceValue1 n) { unimplementedVisitor("visit(SpaceValue1)"); return true; }
-    public void endVisit(SpaceValue1 n) { unimplementedVisitor("endVisit(SpaceValue1)"); }
+    public boolean visit(SpaceValue__IDENT n) { unimplementedVisitor("visit(SpaceValue__IDENT)"); return true; }
+    public void endVisit(SpaceValue__IDENT n) { unimplementedVisitor("endVisit(SpaceValue__IDENT)"); }
 
-    public boolean visit(GroupOption0 n) { unimplementedVisitor("visit(GroupOption0)"); return true; }
-    public void endVisit(GroupOption0 n) { unimplementedVisitor("endVisit(GroupOption0)"); }
+    public boolean visit(GroupOption__op_EQUAL_BoxOperator n) { unimplementedVisitor("visit(GroupOption__op_EQUAL_BoxOperator)"); return true; }
+    public void endVisit(GroupOption__op_EQUAL_BoxOperator n) { unimplementedVisitor("endVisit(GroupOption__op_EQUAL_BoxOperator)"); }
 
-    public boolean visit(GroupOption1 n) { unimplementedVisitor("visit(GroupOption1)"); return true; }
-    public void endVisit(GroupOption1 n) { unimplementedVisitor("endVisit(GroupOption1)"); }
+    public boolean visit(GroupOption__gs_EQUAL_NUMBER n) { unimplementedVisitor("visit(GroupOption__gs_EQUAL_NUMBER)"); return true; }
+    public void endVisit(GroupOption__gs_EQUAL_NUMBER n) { unimplementedVisitor("endVisit(GroupOption__gs_EQUAL_NUMBER)"); }
 
 
     public boolean visit(ASTNode n)
@@ -86,23 +86,23 @@ public abstract class AbstractVisitor implements Visitor
         else if (n instanceof SpaceOptionList) return visit((SpaceOptionList) n);
         else if (n instanceof SpaceOption) return visit((SpaceOption) n);
         else if (n instanceof GroupOptionList) return visit((GroupOptionList) n);
-        else if (n instanceof Box0) return visit((Box0) n);
-        else if (n instanceof Box1) return visit((Box1) n);
-        else if (n instanceof BoxOperator0) return visit((BoxOperator0) n);
-        else if (n instanceof BoxOperator1) return visit((BoxOperator1) n);
-        else if (n instanceof BoxOperator2) return visit((BoxOperator2) n);
-        else if (n instanceof BoxOperator3) return visit((BoxOperator3) n);
-        else if (n instanceof BoxOperator4) return visit((BoxOperator4) n);
-        else if (n instanceof BoxOperator5) return visit((BoxOperator5) n);
-        else if (n instanceof BoxOperator6) return visit((BoxOperator6) n);
-        else if (n instanceof SpaceSymbol0) return visit((SpaceSymbol0) n);
-        else if (n instanceof SpaceSymbol1) return visit((SpaceSymbol1) n);
-        else if (n instanceof SpaceSymbol2) return visit((SpaceSymbol2) n);
-        else if (n instanceof SpaceSymbol3) return visit((SpaceSymbol3) n);
-        else if (n instanceof SpaceValue0) return visit((SpaceValue0) n);
-        else if (n instanceof SpaceValue1) return visit((SpaceValue1) n);
-        else if (n instanceof GroupOption0) return visit((GroupOption0) n);
-        else if (n instanceof GroupOption1) return visit((GroupOption1) n);
+        else if (n instanceof Box__STRING) return visit((Box__STRING) n);
+        else if (n instanceof Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET) return visit((Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET) n);
+        else if (n instanceof BoxOperator__H_SpaceOptionList) return visit((BoxOperator__H_SpaceOptionList) n);
+        else if (n instanceof BoxOperator__V_SpaceOptionList) return visit((BoxOperator__V_SpaceOptionList) n);
+        else if (n instanceof BoxOperator__HV_SpaceOptionList) return visit((BoxOperator__HV_SpaceOptionList) n);
+        else if (n instanceof BoxOperator__HOV_SpaceOptionList) return visit((BoxOperator__HOV_SpaceOptionList) n);
+        else if (n instanceof BoxOperator__I_SpaceOptionList) return visit((BoxOperator__I_SpaceOptionList) n);
+        else if (n instanceof BoxOperator__G_GroupOptionList) return visit((BoxOperator__G_GroupOptionList) n);
+        else if (n instanceof BoxOperator__WD) return visit((BoxOperator__WD) n);
+        else if (n instanceof SpaceSymbol__vs) return visit((SpaceSymbol__vs) n);
+        else if (n instanceof SpaceSymbol__hs) return visit((SpaceSymbol__hs) n);
+        else if (n instanceof SpaceSymbol__is) return visit((SpaceSymbol__is) n);
+        else if (n instanceof SpaceSymbol__ts) return visit((SpaceSymbol__ts) n);
+        else if (n instanceof SpaceValue__NUMBER) return visit((SpaceValue__NUMBER) n);
+        else if (n instanceof SpaceValue__IDENT) return visit((SpaceValue__IDENT) n);
+        else if (n instanceof GroupOption__op_EQUAL_BoxOperator) return visit((GroupOption__op_EQUAL_BoxOperator) n);
+        else if (n instanceof GroupOption__gs_EQUAL_NUMBER) return visit((GroupOption__gs_EQUAL_NUMBER) n);
         throw new UnsupportedOperationException("visit(" + n.getClass().toString() + ")");
     }
     public void endVisit(ASTNode n)
@@ -112,23 +112,23 @@ public abstract class AbstractVisitor implements Visitor
         else if (n instanceof SpaceOptionList) endVisit((SpaceOptionList) n);
         else if (n instanceof SpaceOption) endVisit((SpaceOption) n);
         else if (n instanceof GroupOptionList) endVisit((GroupOptionList) n);
-        else if (n instanceof Box0) endVisit((Box0) n);
-        else if (n instanceof Box1) endVisit((Box1) n);
-        else if (n instanceof BoxOperator0) endVisit((BoxOperator0) n);
-        else if (n instanceof BoxOperator1) endVisit((BoxOperator1) n);
-        else if (n instanceof BoxOperator2) endVisit((BoxOperator2) n);
-        else if (n instanceof BoxOperator3) endVisit((BoxOperator3) n);
-        else if (n instanceof BoxOperator4) endVisit((BoxOperator4) n);
-        else if (n instanceof BoxOperator5) endVisit((BoxOperator5) n);
-        else if (n instanceof BoxOperator6) endVisit((BoxOperator6) n);
-        else if (n instanceof SpaceSymbol0) endVisit((SpaceSymbol0) n);
-        else if (n instanceof SpaceSymbol1) endVisit((SpaceSymbol1) n);
-        else if (n instanceof SpaceSymbol2) endVisit((SpaceSymbol2) n);
-        else if (n instanceof SpaceSymbol3) endVisit((SpaceSymbol3) n);
-        else if (n instanceof SpaceValue0) endVisit((SpaceValue0) n);
-        else if (n instanceof SpaceValue1) endVisit((SpaceValue1) n);
-        else if (n instanceof GroupOption0) endVisit((GroupOption0) n);
-        else if (n instanceof GroupOption1) endVisit((GroupOption1) n);
+        else if (n instanceof Box__STRING) endVisit((Box__STRING) n);
+        else if (n instanceof Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET) endVisit((Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET) n);
+        else if (n instanceof BoxOperator__H_SpaceOptionList) endVisit((BoxOperator__H_SpaceOptionList) n);
+        else if (n instanceof BoxOperator__V_SpaceOptionList) endVisit((BoxOperator__V_SpaceOptionList) n);
+        else if (n instanceof BoxOperator__HV_SpaceOptionList) endVisit((BoxOperator__HV_SpaceOptionList) n);
+        else if (n instanceof BoxOperator__HOV_SpaceOptionList) endVisit((BoxOperator__HOV_SpaceOptionList) n);
+        else if (n instanceof BoxOperator__I_SpaceOptionList) endVisit((BoxOperator__I_SpaceOptionList) n);
+        else if (n instanceof BoxOperator__G_GroupOptionList) endVisit((BoxOperator__G_GroupOptionList) n);
+        else if (n instanceof BoxOperator__WD) endVisit((BoxOperator__WD) n);
+        else if (n instanceof SpaceSymbol__vs) endVisit((SpaceSymbol__vs) n);
+        else if (n instanceof SpaceSymbol__hs) endVisit((SpaceSymbol__hs) n);
+        else if (n instanceof SpaceSymbol__is) endVisit((SpaceSymbol__is) n);
+        else if (n instanceof SpaceSymbol__ts) endVisit((SpaceSymbol__ts) n);
+        else if (n instanceof SpaceValue__NUMBER) endVisit((SpaceValue__NUMBER) n);
+        else if (n instanceof SpaceValue__IDENT) endVisit((SpaceValue__IDENT) n);
+        else if (n instanceof GroupOption__op_EQUAL_BoxOperator) endVisit((GroupOption__op_EQUAL_BoxOperator) n);
+        else if (n instanceof GroupOption__gs_EQUAL_NUMBER) endVisit((GroupOption__gs_EQUAL_NUMBER) n);
         throw new UnsupportedOperationException("visit(" + n.getClass().toString() + ")");
     }
 }

@@ -9,11 +9,11 @@ import org.eclipse.imp.parser.IParser;
  *<li>Rule 20:  SpaceValue ::= NUMBER
  *</b>
  */
-public class SpaceValue0 extends ASTNodeToken implements ISpaceValue
+public class SpaceValue__NUMBER extends ASTNodeToken implements ISpaceValue
 {
     public IToken getNUMBER() { return leftIToken; }
 
-    public SpaceValue0(IToken token) { super(token); initialize(); }
+    public SpaceValue__NUMBER(IToken token) { super(token); initialize(); }
 
     public void accept(IAstVisitor v)
     {

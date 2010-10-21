@@ -11,6 +11,11 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
+			<name>org.eclipse.imp.lpg.ide.LPGBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
 			</arguments>
@@ -40,5 +45,6 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.imp.lpg.runtime.LPGNature</nature>
 		<nature>org.eclipse.imp.smapifier.smapinature</nature>
+		<nature>org.eclipse.imp.lpg.ide.LPGNature</nature>
 	</natures>
 </projectDescription>

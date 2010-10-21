@@ -6,33 +6,28 @@ import org.eclipse.imp.parser.IParser;
 
 /**
  *<b>
- *<li>Rule 24:  GroupOption ::= op = BoxOperator
+ *<li>Rule 24:  GroupOption ::= op =$ BoxOperator
  *</b>
  */
-public class GroupOption0 extends ASTNode implements IGroupOption
+public class GroupOption__op_EQUAL_BoxOperator extends ASTNode implements IGroupOption
 {
     private ASTNodeToken _op;
-    private ASTNodeToken _EQUAL;
     private IBoxOperator _BoxOperator;
 
     public ASTNodeToken getop() { return _op; }
-    public ASTNodeToken getEQUAL() { return _EQUAL; }
     /**
      * The value returned by <b>getBoxOperator</b> may be <b>null</b>
      */
     public IBoxOperator getBoxOperator() { return _BoxOperator; }
 
-    public GroupOption0(IToken leftIToken, IToken rightIToken,
-                        ASTNodeToken _op,
-                        ASTNodeToken _EQUAL,
-                        IBoxOperator _BoxOperator)
+    public GroupOption__op_EQUAL_BoxOperator(IToken leftIToken, IToken rightIToken,
+                                             ASTNodeToken _op,
+                                             IBoxOperator _BoxOperator)
     {
         super(leftIToken, rightIToken);
 
         this._op = _op;
         ((ASTNode) _op).setParent(this);
-        this._EQUAL = _EQUAL;
-        ((ASTNode) _EQUAL).setParent(this);
         this._BoxOperator = _BoxOperator;
         if (_BoxOperator != null) ((ASTNode) _BoxOperator).setParent(this);
         initialize();
@@ -45,7 +40,6 @@ public class GroupOption0 extends ASTNode implements IGroupOption
     {
         java.util.ArrayList list = new java.util.ArrayList();
         list.add(_op);
-        list.add(_EQUAL);
         list.add(_BoxOperator);
         return list;
     }
@@ -53,11 +47,10 @@ public class GroupOption0 extends ASTNode implements IGroupOption
     public boolean equals(Object o)
     {
         if (o == this) return true;
-        if (! (o instanceof GroupOption0)) return false;
+        if (! (o instanceof GroupOption__op_EQUAL_BoxOperator)) return false;
         if (! super.equals(o)) return false;
-        GroupOption0 other = (GroupOption0) o;
+        GroupOption__op_EQUAL_BoxOperator other = (GroupOption__op_EQUAL_BoxOperator) o;
         if (! _op.equals(other._op)) return false;
-        if (! _EQUAL.equals(other._EQUAL)) return false;
         if (_BoxOperator == null)
             if (other._BoxOperator != null) return false;
             else; // continue
@@ -69,7 +62,6 @@ public class GroupOption0 extends ASTNode implements IGroupOption
     {
         int hash = super.hashCode();
         hash = hash * 31 + (_op.hashCode());
-        hash = hash * 31 + (_EQUAL.hashCode());
         hash = hash * 31 + (_BoxOperator == null ? 0 : _BoxOperator.hashCode());
         return hash;
     }
@@ -87,7 +79,6 @@ public class GroupOption0 extends ASTNode implements IGroupOption
         if (checkChildren)
         {
             _op.accept(v);
-            _EQUAL.accept(v);
             if (_BoxOperator != null) _BoxOperator.accept(v);
         }
         v.endVisit(this);

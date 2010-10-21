@@ -4,11 +4,12 @@ import lpg.runtime.*;
 
 import org.eclipse.imp.parser.IParser;
 
-public abstract class AbstractASTNodeList extends ASTNode
+public abstract class AbstractASTNodeList extends ASTNode implements IAbstractArrayList<ASTNode>
 {
     private boolean leftRecursive;
     private java.util.ArrayList list;
     public int size() { return list.size(); }
+    public java.util.List getList() { return list; }
     public ASTNode getElementAt(int i) { return (ASTNode) list.get(leftRecursive ? i : list.size() - 1 - i); }
     public java.util.ArrayList getArrayList()
     {

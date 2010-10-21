@@ -9,7 +9,7 @@ import org.eclipse.imp.parser.IParser;
  *<li>Rule 7:  BoxOperator ::= HOV SpaceOptionList
  *</b>
  */
-public class BoxOperator3 extends ASTNode implements IBoxOperator
+public class BoxOperator__HOV_SpaceOptionList extends ASTNode implements IBoxOperator
 {
     private ASTNodeToken _HOV;
     private SpaceOptionList _SpaceOptionList;
@@ -17,9 +17,9 @@ public class BoxOperator3 extends ASTNode implements IBoxOperator
     public ASTNodeToken getHOV() { return _HOV; }
     public SpaceOptionList getSpaceOptionList() { return _SpaceOptionList; }
 
-    public BoxOperator3(IToken leftIToken, IToken rightIToken,
-                        ASTNodeToken _HOV,
-                        SpaceOptionList _SpaceOptionList)
+    public BoxOperator__HOV_SpaceOptionList(IToken leftIToken, IToken rightIToken,
+                                            ASTNodeToken _HOV,
+                                            SpaceOptionList _SpaceOptionList)
     {
         super(leftIToken, rightIToken);
 
@@ -44,9 +44,9 @@ public class BoxOperator3 extends ASTNode implements IBoxOperator
     public boolean equals(Object o)
     {
         if (o == this) return true;
-        if (! (o instanceof BoxOperator3)) return false;
+        if (! (o instanceof BoxOperator__HOV_SpaceOptionList)) return false;
         if (! super.equals(o)) return false;
-        BoxOperator3 other = (BoxOperator3) o;
+        BoxOperator__HOV_SpaceOptionList other = (BoxOperator__HOV_SpaceOptionList) o;
         if (! _HOV.equals(other._HOV)) return false;
         if (! _SpaceOptionList.equals(other._SpaceOptionList)) return false;
         return true;

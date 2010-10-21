@@ -6,14 +6,14 @@ import org.eclipse.imp.parser.IParser;
 
 /**
  *<b>
- *<li>Rule 15:  SpaceSymbol ::= vs
+ *<li>Rule 18:  SpaceSymbol ::= ts
  *</b>
  */
-public class SpaceSymbol0 extends ASTNodeToken implements ISpaceSymbol
+public class SpaceSymbol__ts extends ASTNodeToken implements ISpaceSymbol
 {
-    public IToken getvs() { return leftIToken; }
+    public IToken getts() { return leftIToken; }
 
-    public SpaceSymbol0(IToken token) { super(token); initialize(); }
+    public SpaceSymbol__ts(IToken token) { super(token); initialize(); }
 
     public void accept(IAstVisitor v)
     {

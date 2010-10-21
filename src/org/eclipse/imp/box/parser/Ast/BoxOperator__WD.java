@@ -9,11 +9,11 @@ import org.eclipse.imp.parser.IParser;
  *<li>Rule 10:  BoxOperator ::= WD
  *</b>
  */
-public class BoxOperator6 extends ASTNodeToken implements IBoxOperator
+public class BoxOperator__WD extends ASTNodeToken implements IBoxOperator
 {
     public IToken getWD() { return leftIToken; }
 
-    public BoxOperator6(IToken token) { super(token); initialize(); }
+    public BoxOperator__WD(IToken token) { super(token); initialize(); }
 
     public void accept(IAstVisitor v)
     {

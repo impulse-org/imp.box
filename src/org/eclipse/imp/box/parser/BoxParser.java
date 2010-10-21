@@ -171,20 +171,18 @@ public class BoxParser implements RuleAction, IParser
             //
             case 1: {
                 setResult(
-                    new Box0(getRhsIToken(1))
+                    new Box__STRING(getRhsIToken(1))
                 );
                 break;
             }
             //
-            // Rule 2:  Box ::= BoxOperator [ BoxList ]
+            // Rule 2:  Box ::= BoxOperator [$ BoxList ]$
             //
             case 2: {
                 setResult(
-                    new Box1(getLeftIToken(), getRightIToken(),
-                             (IBoxOperator)getRhsSym(1),
-                             new ASTNodeToken(getRhsIToken(2)),
-                             (BoxList)getRhsSym(3),
-                             new ASTNodeToken(getRhsIToken(4)))
+                    new Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET(getLeftIToken(), getRightIToken(),
+                                                                          (IBoxOperator)getRhsSym(1),
+                                                                          (BoxList)getRhsSym(3))
                 );
                 break;
             }
@@ -200,9 +198,9 @@ public class BoxParser implements RuleAction, IParser
             //
             case 4: {
                 setResult(
-                    new BoxOperator0(getLeftIToken(), getRightIToken(),
-                                     new ASTNodeToken(getRhsIToken(1)),
-                                     (SpaceOptionList)getRhsSym(2))
+                    new BoxOperator__H_SpaceOptionList(getLeftIToken(), getRightIToken(),
+                                                       new ASTNodeToken(getRhsIToken(1)),
+                                                       (SpaceOptionList)getRhsSym(2))
                 );
                 break;
             }
@@ -211,9 +209,9 @@ public class BoxParser implements RuleAction, IParser
             //
             case 5: {
                 setResult(
-                    new BoxOperator1(getLeftIToken(), getRightIToken(),
-                                     new ASTNodeToken(getRhsIToken(1)),
-                                     (SpaceOptionList)getRhsSym(2))
+                    new BoxOperator__V_SpaceOptionList(getLeftIToken(), getRightIToken(),
+                                                       new ASTNodeToken(getRhsIToken(1)),
+                                                       (SpaceOptionList)getRhsSym(2))
                 );
                 break;
             }
@@ -222,9 +220,9 @@ public class BoxParser implements RuleAction, IParser
             //
             case 6: {
                 setResult(
-                    new BoxOperator2(getLeftIToken(), getRightIToken(),
-                                     new ASTNodeToken(getRhsIToken(1)),
-                                     (SpaceOptionList)getRhsSym(2))
+                    new BoxOperator__HV_SpaceOptionList(getLeftIToken(), getRightIToken(),
+                                                        new ASTNodeToken(getRhsIToken(1)),
+                                                        (SpaceOptionList)getRhsSym(2))
                 );
                 break;
             }
@@ -233,9 +231,9 @@ public class BoxParser implements RuleAction, IParser
             //
             case 7: {
                 setResult(
-                    new BoxOperator3(getLeftIToken(), getRightIToken(),
-                                     new ASTNodeToken(getRhsIToken(1)),
-                                     (SpaceOptionList)getRhsSym(2))
+                    new BoxOperator__HOV_SpaceOptionList(getLeftIToken(), getRightIToken(),
+                                                         new ASTNodeToken(getRhsIToken(1)),
+                                                         (SpaceOptionList)getRhsSym(2))
                 );
                 break;
             }
@@ -244,9 +242,9 @@ public class BoxParser implements RuleAction, IParser
             //
             case 8: {
                 setResult(
-                    new BoxOperator4(getLeftIToken(), getRightIToken(),
-                                     new ASTNodeToken(getRhsIToken(1)),
-                                     (SpaceOptionList)getRhsSym(2))
+                    new BoxOperator__I_SpaceOptionList(getLeftIToken(), getRightIToken(),
+                                                       new ASTNodeToken(getRhsIToken(1)),
+                                                       (SpaceOptionList)getRhsSym(2))
                 );
                 break;
             }
@@ -255,9 +253,9 @@ public class BoxParser implements RuleAction, IParser
             //
             case 9: {
                 setResult(
-                    new BoxOperator5(getLeftIToken(), getRightIToken(),
-                                     new ASTNodeToken(getRhsIToken(1)),
-                                     (GroupOptionList)getRhsSym(2))
+                    new BoxOperator__G_GroupOptionList(getLeftIToken(), getRightIToken(),
+                                                       new ASTNodeToken(getRhsIToken(1)),
+                                                       (GroupOptionList)getRhsSym(2))
                 );
                 break;
             }
@@ -266,7 +264,7 @@ public class BoxParser implements RuleAction, IParser
             //
             case 10: {
                 setResult(
-                    new BoxOperator6(getRhsIToken(1))
+                    new BoxOperator__WD(getRhsIToken(1))
                 );
                 break;
             }
@@ -307,7 +305,7 @@ public class BoxParser implements RuleAction, IParser
             //
             case 15: {
                 setResult(
-                    new SpaceSymbol0(getRhsIToken(1))
+                    new SpaceSymbol__vs(getRhsIToken(1))
                 );
                 break;
             }
@@ -316,7 +314,7 @@ public class BoxParser implements RuleAction, IParser
             //
             case 16: {
                 setResult(
-                    new SpaceSymbol1(getRhsIToken(1))
+                    new SpaceSymbol__hs(getRhsIToken(1))
                 );
                 break;
             }
@@ -325,7 +323,7 @@ public class BoxParser implements RuleAction, IParser
             //
             case 17: {
                 setResult(
-                    new SpaceSymbol2(getRhsIToken(1))
+                    new SpaceSymbol__is(getRhsIToken(1))
                 );
                 break;
             }
@@ -334,18 +332,17 @@ public class BoxParser implements RuleAction, IParser
             //
             case 18: {
                 setResult(
-                    new SpaceSymbol3(getRhsIToken(1))
+                    new SpaceSymbol__ts(getRhsIToken(1))
                 );
                 break;
             }
             //
-            // Rule 19:  SpaceOption ::= SpaceSymbol = SpaceValue
+            // Rule 19:  SpaceOption ::= SpaceSymbol =$ SpaceValue
             //
             case 19: {
                 setResult(
                     new SpaceOption(getLeftIToken(), getRightIToken(),
                                     (ISpaceSymbol)getRhsSym(1),
-                                    new ASTNodeToken(getRhsIToken(2)),
                                     (ISpaceValue)getRhsSym(3))
                 );
                 break;
@@ -355,7 +352,7 @@ public class BoxParser implements RuleAction, IParser
             //
             case 20: {
                 setResult(
-                    new SpaceValue0(getRhsIToken(1))
+                    new SpaceValue__NUMBER(getRhsIToken(1))
                 );
                 break;
             }
@@ -364,7 +361,7 @@ public class BoxParser implements RuleAction, IParser
             //
             case 21: {
                 setResult(
-                    new SpaceValue1(getRhsIToken(1))
+                    new SpaceValue__IDENT(getRhsIToken(1))
                 );
                 break;
             }
@@ -385,26 +382,24 @@ public class BoxParser implements RuleAction, IParser
                 break;
             }
             //
-            // Rule 24:  GroupOption ::= op = BoxOperator
+            // Rule 24:  GroupOption ::= op =$ BoxOperator
             //
             case 24: {
                 setResult(
-                    new GroupOption0(getLeftIToken(), getRightIToken(),
-                                     new ASTNodeToken(getRhsIToken(1)),
-                                     new ASTNodeToken(getRhsIToken(2)),
-                                     (IBoxOperator)getRhsSym(3))
+                    new GroupOption__op_EQUAL_BoxOperator(getLeftIToken(), getRightIToken(),
+                                                          new ASTNodeToken(getRhsIToken(1)),
+                                                          (IBoxOperator)getRhsSym(3))
                 );
                 break;
             }
             //
-            // Rule 25:  GroupOption ::= gs = NUMBER
+            // Rule 25:  GroupOption ::= gs =$ NUMBER
             //
             case 25: {
                 setResult(
-                    new GroupOption1(getLeftIToken(), getRightIToken(),
-                                     new ASTNodeToken(getRhsIToken(1)),
-                                     new ASTNodeToken(getRhsIToken(2)),
-                                     new ASTNodeToken(getRhsIToken(3)))
+                    new GroupOption__gs_EQUAL_NUMBER(getLeftIToken(), getRightIToken(),
+                                                     new ASTNodeToken(getRhsIToken(1)),
+                                                     new ASTNodeToken(getRhsIToken(3)))
                 );
                 break;
             }

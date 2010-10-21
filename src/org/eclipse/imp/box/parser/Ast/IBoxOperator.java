@@ -4,13 +4,13 @@ package org.eclipse.imp.box.parser.Ast;
  * is implemented by:
  *<b>
  *<ul>
- *<li>BoxOperator0
- *<li>BoxOperator1
- *<li>BoxOperator2
- *<li>BoxOperator3
- *<li>BoxOperator4
- *<li>BoxOperator5
- *<li>BoxOperator6
+ *<li>BoxOperator__H_SpaceOptionList
+ *<li>BoxOperator__V_SpaceOptionList
+ *<li>BoxOperator__HV_SpaceOptionList
+ *<li>BoxOperator__HOV_SpaceOptionList
+ *<li>BoxOperator__I_SpaceOptionList
+ *<li>BoxOperator__G_GroupOptionList
+ *<li>BoxOperator__WD
  *</ul>
  *</b>
  */

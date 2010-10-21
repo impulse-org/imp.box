@@ -8,8 +8,8 @@ import org.eclipse.imp.parser.IParser;
  * is implemented by:
  *<b>
  *<ul>
- *<li>GroupOption0
- *<li>GroupOption1
+ *<li>GroupOption__op_EQUAL_BoxOperator
+ *<li>GroupOption__gs_EQUAL_NUMBER
  *</ul>
  *</b>
  */

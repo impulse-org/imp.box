@@ -6,14 +6,14 @@ import org.eclipse.imp.parser.IParser;
 
 /**
  *<b>
- *<li>Rule 17:  SpaceSymbol ::= is
+ *<li>Rule 1:  Box ::= STRING
  *</b>
  */
-public class SpaceSymbol2 extends ASTNodeToken implements ISpaceSymbol
+public class Box__STRING extends ASTNodeToken implements IBox
 {
-    public IToken getis() { return leftIToken; }
+    public IToken getSTRING() { return leftIToken; }
 
-    public SpaceSymbol2(IToken token) { super(token); initialize(); }
+    public Box__STRING(IToken token) { super(token); initialize(); }
 
     public void accept(IAstVisitor v)
     {

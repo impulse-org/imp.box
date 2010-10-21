@@ -19,7 +19,7 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.imp.box.Activator;
 import org.eclipse.imp.box.parser.Ast.AbstractVisitor;
-import org.eclipse.imp.box.parser.Ast.Box0;
+import org.eclipse.imp.box.parser.Ast.Box__STRING;
 import org.eclipse.imp.box.parser.Ast.IBox;
 import org.eclipse.imp.box.parser.Ast.Visitor;
 import org.osgi.framework.Bundle;
@@ -65,7 +65,7 @@ public class BoxFactory {
 					// do nothing
 				}
 
-				public boolean visit(Box0 n) {
+				public boolean visit(Box__STRING n) {
 					String lit = n.toString();
 
 					buffer.append(unquote(lit));

@@ -6,25 +6,25 @@ import org.eclipse.imp.parser.IParser;
 
 /**
  *<b>
- *<li>Rule 5:  BoxOperator ::= V SpaceOptionList
+ *<li>Rule 6:  BoxOperator ::= HV SpaceOptionList
  *</b>
  */
-public class BoxOperator1 extends ASTNode implements IBoxOperator
+public class BoxOperator__HV_SpaceOptionList extends ASTNode implements IBoxOperator
 {
-    private ASTNodeToken _V;
+    private ASTNodeToken _HV;
     private SpaceOptionList _SpaceOptionList;
 
-    public ASTNodeToken getV() { return _V; }
+    public ASTNodeToken getHV() { return _HV; }
     public SpaceOptionList getSpaceOptionList() { return _SpaceOptionList; }
 
-    public BoxOperator1(IToken leftIToken, IToken rightIToken,
-                        ASTNodeToken _V,
-                        SpaceOptionList _SpaceOptionList)
+    public BoxOperator__HV_SpaceOptionList(IToken leftIToken, IToken rightIToken,
+                                           ASTNodeToken _HV,
+                                           SpaceOptionList _SpaceOptionList)
     {
         super(leftIToken, rightIToken);
 
-        this._V = _V;
-        ((ASTNode) _V).setParent(this);
+        this._HV = _HV;
+        ((ASTNode) _HV).setParent(this);
         this._SpaceOptionList = _SpaceOptionList;
         ((ASTNode) _SpaceOptionList).setParent(this);
         initialize();
@@ -36,7 +36,7 @@ public class BoxOperator1 extends ASTNode implements IBoxOperator
     public java.util.ArrayList getAllChildren()
     {
         java.util.ArrayList list = new java.util.ArrayList();
-        list.add(_V);
+        list.add(_HV);
         list.add(_SpaceOptionList);
         return list;
     }
@@ -44,10 +44,10 @@ public class BoxOperator1 extends ASTNode implements IBoxOperator
     public boolean equals(Object o)
     {
         if (o == this) return true;
-        if (! (o instanceof BoxOperator1)) return false;
+        if (! (o instanceof BoxOperator__HV_SpaceOptionList)) return false;
         if (! super.equals(o)) return false;
-        BoxOperator1 other = (BoxOperator1) o;
-        if (! _V.equals(other._V)) return false;
+        BoxOperator__HV_SpaceOptionList other = (BoxOperator__HV_SpaceOptionList) o;
+        if (! _HV.equals(other._HV)) return false;
         if (! _SpaceOptionList.equals(other._SpaceOptionList)) return false;
         return true;
     }
@@ -55,7 +55,7 @@ public class BoxOperator1 extends ASTNode implements IBoxOperator
     public int hashCode()
     {
         int hash = super.hashCode();
-        hash = hash * 31 + (_V.hashCode());
+        hash = hash * 31 + (_HV.hashCode());
         hash = hash * 31 + (_SpaceOptionList.hashCode());
         return hash;
     }
@@ -72,7 +72,7 @@ public class BoxOperator1 extends ASTNode implements IBoxOperator
         boolean checkChildren = v.visit(this);
         if (checkChildren)
         {
-            _V.accept(v);
+            _HV.accept(v);
             _SpaceOptionList.accept(v);
         }
         v.endVisit(this);

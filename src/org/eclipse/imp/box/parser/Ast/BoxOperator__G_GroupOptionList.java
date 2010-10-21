@@ -9,7 +9,7 @@ import org.eclipse.imp.parser.IParser;
  *<li>Rule 9:  BoxOperator ::= G GroupOptionList
  *</b>
  */
-public class BoxOperator5 extends ASTNode implements IBoxOperator
+public class BoxOperator__G_GroupOptionList extends ASTNode implements IBoxOperator
 {
     private ASTNodeToken _G;
     private GroupOptionList _GroupOptionList;
@@ -17,9 +17,9 @@ public class BoxOperator5 extends ASTNode implements IBoxOperator
     public ASTNodeToken getG() { return _G; }
     public GroupOptionList getGroupOptionList() { return _GroupOptionList; }
 
-    public BoxOperator5(IToken leftIToken, IToken rightIToken,
-                        ASTNodeToken _G,
-                        GroupOptionList _GroupOptionList)
+    public BoxOperator__G_GroupOptionList(IToken leftIToken, IToken rightIToken,
+                                          ASTNodeToken _G,
+                                          GroupOptionList _GroupOptionList)
     {
         super(leftIToken, rightIToken);
 
@@ -44,9 +44,9 @@ public class BoxOperator5 extends ASTNode implements IBoxOperator
     public boolean equals(Object o)
     {
         if (o == this) return true;
-        if (! (o instanceof BoxOperator5)) return false;
+        if (! (o instanceof BoxOperator__G_GroupOptionList)) return false;
         if (! super.equals(o)) return false;
-        BoxOperator5 other = (BoxOperator5) o;
+        BoxOperator__G_GroupOptionList other = (BoxOperator__G_GroupOptionList) o;
         if (! _G.equals(other._G)) return false;
         if (! _GroupOptionList.equals(other._GroupOptionList)) return false;
         return true;
