@@ -29,7 +29,7 @@ public class BoxInterpreterTest {
                      I(8, "Console.OUT.println(Hello, World!);"),
                      "}"),
                 80);
-        runTest(V( H("public", "def", H(0, "foo(", HV( "x: int,", "y:int,", "sa: Array[String])")), "{"),
+        runTest(V( H("public", "def", H(0, "foo(", HV( "x: int,", "y:int,", "sa: Array[String]"), ")"), "{"),
                         I("Console.OUT.println(Hello, World!);"),
                         "}"),
                 20);
@@ -42,7 +42,7 @@ public class BoxInterpreterTest {
 
     private static void runTest(String boxString, int width) {
         System.out.println(boxString);
-        BoxInterpreter bi= new BoxInterpreter(width);
+        BoxInterpreter bi= new BoxInterpreter(width, true, 4);
         IBox boxPrg= parseBox(boxString);
         String result= bi.interpret(boxPrg);
 

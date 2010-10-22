@@ -27,7 +27,7 @@ public class BoxInterpreter {
     }
 
     public enum BoxOperator {
-        H, V, HV, HOV, I, G, WD
+        H, V, HV, HOV, I, G, WD // , A, R, SL
     }
 
     public static class GroupOptions {
@@ -45,18 +45,39 @@ public class BoxInterpreter {
         }
     }
 
-    private final static int DEFAULT_WIDTH= 80;
+    public static class BoxFormattingPrefs {
+        public final int PageWidth;
+        public final boolean UseSpacesForTabs;
+        public final int TabWidth;
+
+        public BoxFormattingPrefs() {
+            this(80, true, 4);
+        }
+
+        public BoxFormattingPrefs(int pageWidth, boolean useSpacesForTabs, int tabWidth) {
+            PageWidth= pageWidth;
+            UseSpacesForTabs= useSpacesForTabs;
+            TabWidth= tabWidth;
+        }
+    }
 
     private final Stack<Integer> fIndentStack= new Stack<Integer>();
 
-    private int fCurWidth= DEFAULT_WIDTH;
+    private final BoxFormattingPrefs fFormattingPrefs;
+
+    private int fCurWidth;
 
     public BoxInterpreter() {
-        this(DEFAULT_WIDTH);
+        this(new BoxFormattingPrefs());
     }
 
-    public BoxInterpreter(int width) {
-        fCurWidth= width;
+    public BoxInterpreter(BoxFormattingPrefs prefs) {
+        fFormattingPrefs= prefs;
+        fCurWidth= fFormattingPrefs.PageWidth;
+    }
+
+    public BoxInterpreter(int pageWidth, boolean useSpacesForTabs, int tabWidth) {
+        this(new BoxFormattingPrefs(pageWidth, useSpacesForTabs, tabWidth));
     }
 
     private void pushIndent(int indent) {
@@ -67,7 +88,7 @@ public class BoxInterpreter {
     private void popIndent() {
         if (fIndentStack.size() < 1) {
             System.err.println("Unmatched call to popIndent()!");
-            fCurWidth= DEFAULT_WIDTH;
+            fCurWidth= fFormattingPrefs.PageWidth;
         } else {
             fCurWidth= fIndentStack.pop();
         }
@@ -304,7 +325,7 @@ public class BoxInterpreter {
                     if (i > 0) {
                         newlines(vs, sb);
                     }
-                    sb.append(translation.get(child));
+                    emit(translation.get(child), sb);
                 }
                 return sb.toString();
             }
@@ -313,13 +334,23 @@ public class BoxInterpreter {
                 SpacingOptions spaceOptions= processOptions(op.getSpaceOptionList());
                 int hs= spaceOptions.horizontalSpacing();
                 StringBuilder sb= new StringBuilder();
+                int col= fCol;
 
                 for(int i=0; i < children.size(); i++) {
                     IBox child= children.getBoxAt(i);
+                    String childStr= translation.get(child);
+                    String[] childLines= childStr.split("\n");
+
                     if (i > 0) {
-                        sb.append(spaces(hs));
+                        emit(spaces(hs), sb);
                     }
-                    sb.append(translation.get(child));
+                    for(int l=0; l < childLines.length; l++) {
+                        if (l > 0) {
+                            newlines(1, sb);
+                            emit(spaces(col), sb);
+                        }
+                        emit(childLines[l], sb);
+                    }
                 }
                 return sb.toString();
             }
