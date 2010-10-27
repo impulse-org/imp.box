@@ -183,19 +183,33 @@ public class BoxInterpreter {
                 String result= "";
 
                 if (op instanceof BoxOperator__H_SpaceOptionList) {
-                    result= handleHorizontal((BoxOperator__H_SpaceOptionList) op, children);
+                    BoxOperator__H_SpaceOptionList horizOp= (BoxOperator__H_SpaceOptionList) op;
+
+                    result= handleHorizontal(processOptions(horizOp.getSpaceOptionList()), children);
                 } else if (op instanceof BoxOperator__V_SpaceOptionList) {
-                    result= handleVertical((BoxOperator__V_SpaceOptionList) op, children);
+                    BoxOperator__V_SpaceOptionList vertOp= (BoxOperator__V_SpaceOptionList) op;
+
+                    result= handleVertical(processOptions(vertOp.getSpaceOptionList()), children);
                 } else if (op instanceof BoxOperator__HV_SpaceOptionList) {
-                    result= handleHV((BoxOperator__HV_SpaceOptionList) op, children);
+                    BoxOperator__HV_SpaceOptionList hvOp= (BoxOperator__HV_SpaceOptionList) op;
+
+                    result= handleHV(processOptions(hvOp.getSpaceOptionList()), children);
                 } else if (op instanceof BoxOperator__HOV_SpaceOptionList) {
-                    result= handleHOV((BoxOperator__HOV_SpaceOptionList) op, children);
+                    BoxOperator__HOV_SpaceOptionList hovOp= (BoxOperator__HOV_SpaceOptionList) op;
+
+                    result= handleHOV(processOptions(hovOp.getSpaceOptionList()), children);
                 } else if (op instanceof BoxOperator__I_SpaceOptionList) {
-                    result= handleIndent((BoxOperator__I_SpaceOptionList) op, children);
+                    BoxOperator__I_SpaceOptionList indentOp= (BoxOperator__I_SpaceOptionList) op;
+
+                    result= handleIndent(processOptions(indentOp.getSpaceOptionList()), children);
                 } else if (op instanceof BoxOperator__G_GroupOptionList) {
-                    result= handleGroup((BoxOperator__G_GroupOptionList) op, children);
+                    BoxOperator__G_GroupOptionList grpOp= (BoxOperator__G_GroupOptionList) op;
+
+                    result= handleGroup(processOptions(grpOp.getGroupOptionList()), children);
                 } else if (op instanceof BoxOperator__WD) {
-                    result= handleWidth((BoxOperator__WD) op, children);
+                    BoxOperator__WD widOp= (BoxOperator__WD) op;
+
+                    result= handleWidth(widOp, children);
                 }
                 translation.put(n, result);
             }
@@ -226,22 +240,91 @@ public class BoxInterpreter {
                 return result;
             }
 
-            private String handleWidth(BoxOperator__WD op, BoxList children) {
-                throw new UnsupportedOperationException("WD operator not supported");
+            private String handleHorizontal(SpacingOptions spaceOptions, BoxList children) {
+                int hs= spaceOptions.horizontalSpacing();
+                StringBuilder sb= new StringBuilder();
+                int col= 0;
+
+                for(int i=0; i < children.size(); i++) {
+                    IBox child= children.getBoxAt(i);
+                    String childStr= translation.get(child);
+                    String[] childLines= childStr.split("\n");
+                    int maxChildWidth= maxWidth(childLines);
+
+                    if (i > 0) {
+                        emit(spaces(hs), sb);
+                    }
+                    for(int l=0; l < childLines.length; l++) {
+                        if (l > 0) {
+                            newlines(1, sb);
+                            emit(spaces(col), sb);
+                        }
+                        emit(childLines[l], sb);
+                    }
+                    col += maxChildWidth + hs;
+                }
+                return sb.toString();
             }
 
-            private String handleIndent(BoxOperator__I_SpaceOptionList op, BoxList children) {
-                assert(children.size() == 1);
-
-                SpacingOptions spaceOptions= processOptions(op.getSpaceOptionList());
-                IBox child= children.getBoxAt(0); // Only one child
-
-                popIndent();
-                return spaces(spaceOptions.indentationSpacing()) + translation.get(child);
+            private int maxWidth(String[] lines) {
+                int max= 0;
+                for(String line: lines) {
+                    if (line.length() > max) {
+                        max= line.length();
+                    }
+                }
+                return max;
             }
 
-            private String handleHOV(BoxOperator__HOV_SpaceOptionList op, BoxList children) {
-                SpacingOptions spaceOptions= processOptions(op.getSpaceOptionList());
+            private String handleVertical(SpacingOptions spaceOptions, BoxList children) {
+                int vs= spaceOptions.verticalSpacing() + 1;
+                StringBuilder sb= new StringBuilder();
+
+                for(int i=0; i < children.size(); i++) {
+                    IBox child= children.getBoxAt(i);
+                    if (i > 0) {
+                        newlines(vs, sb);
+                    }
+                    emit(translation.get(child), sb);
+                }
+                return sb.toString();
+            }
+
+            private String handleHV(SpacingOptions spaceOptions, BoxList children) {
+                int hs= spaceOptions.horizontalSpacing();
+                int vs= spaceOptions.verticalSpacing() + 1;
+                StringBuilder sb= new StringBuilder();
+
+                for(int i=0; i < children.size(); i++) {
+                    IBox child= children.getBoxAt(i);
+                    String childStr= translation.get(child);
+                    int childWid= childStr.length();
+
+                    if (i > 0) {
+                        if (fRemain >= childWid + hs) {
+                            emit(spaces(hs), sb);
+                        } else {
+                            newlines(vs, sb);
+                        }
+                    }
+                    if (fRemain >= childWid) {
+                        emit(childStr, sb);
+                    } else {
+                        if (fCol == 0) {
+                            // Child too wide to fit even a single line.
+                            // Oh well, let it overflow rather than dropping it on the floor.
+                            emit(childStr, sb);
+                        } else {
+                            // Push child to next line (regardless of how wide it is)
+                            newlines(vs, sb);
+                            emit(childStr, sb);
+                        }
+                    }
+                }
+                return sb.toString();
+            }
+
+            private String handleHOV(SpacingOptions spaceOptions, BoxList children) {
                 int hs= spaceOptions.horizontalSpacing();
                 int vs= spaceOptions.verticalSpacing() + 1;
                 int totalWid= 0;
@@ -280,79 +363,19 @@ public class BoxInterpreter {
                 return sb.toString();
             }
 
-            private String handleHV(BoxOperator__HV_SpaceOptionList op, BoxList children) {
-                SpacingOptions spaceOptions= processOptions(op.getSpaceOptionList());
-                int hs= spaceOptions.horizontalSpacing();
-                int vs= spaceOptions.verticalSpacing() + 1;
-                StringBuilder sb= new StringBuilder();
-
-                for(int i=0; i < children.size(); i++) {
-                    IBox child= children.getBoxAt(i);
-                    String childStr= translation.get(child);
-                    int childWid= childStr.length();
-
-                    if (i > 0) {
-                        if (fRemain >= hs) {
-                            emit(spaces(hs), sb);
-                        } else {
-                            newlines(vs, sb);
-                        }
-                    }
-                    if (childWid <= fRemain) {
-                        emit(childStr, sb);
-                    } else {
-                        if (fCol == 0) {
-                            // Child too wide to fit even a single line.
-                            // Oh well, let it overflow rather than dropping it on the floor.
-                            emit(childStr, sb);
-                        } else {
-                            // Push child to next line (regardless of how wide it is)
-                            newlines(vs, sb);
-                            emit(childStr, sb);
-                        }
-                    }
+            private String handleIndent(SpacingOptions spaceOptions, BoxList children) {
+                if (children.size() != 1) {
+                    throw new IllegalArgumentException("Indent operator only accepts 1 child node");
                 }
-                return sb.toString();
+
+                IBox child= children.getBoxAt(0); // Only one child
+
+                popIndent();
+                return spaces(spaceOptions.indentationSpacing()) + translation.get(child);
             }
 
-            private String handleVertical(BoxOperator__V_SpaceOptionList op, BoxList children) {
-                SpacingOptions spaceOptions= processOptions(op.getSpaceOptionList());
-                int vs= spaceOptions.verticalSpacing() + 1;
-                StringBuilder sb= new StringBuilder();
-
-                for(int i=0; i < children.size(); i++) {
-                    IBox child= children.getBoxAt(i);
-                    if (i > 0) {
-                        newlines(vs, sb);
-                    }
-                    emit(translation.get(child), sb);
-                }
-                return sb.toString();
-            }
-
-            private String handleHorizontal(BoxOperator__H_SpaceOptionList op, BoxList children) {
-                SpacingOptions spaceOptions= processOptions(op.getSpaceOptionList());
-                int hs= spaceOptions.horizontalSpacing();
-                StringBuilder sb= new StringBuilder();
-                int col= fCol;
-
-                for(int i=0; i < children.size(); i++) {
-                    IBox child= children.getBoxAt(i);
-                    String childStr= translation.get(child);
-                    String[] childLines= childStr.split("\n");
-
-                    if (i > 0) {
-                        emit(spaces(hs), sb);
-                    }
-                    for(int l=0; l < childLines.length; l++) {
-                        if (l > 0) {
-                            newlines(1, sb);
-                            emit(spaces(col), sb);
-                        }
-                        emit(childLines[l], sb);
-                    }
-                }
-                return sb.toString();
+            private String handleWidth(BoxOperator__WD op, BoxList children) {
+                throw new UnsupportedOperationException("WD operator not supported");
             }
 
             private GroupOptions processOptions(GroupOptionList optionList) {
@@ -392,9 +415,22 @@ public class BoxInterpreter {
                 return new GroupOptions(opEnum, groupSize);
             }
 
-            private String handleGroup(BoxOperator__G_GroupOptionList op, BoxList children) {
-                GroupOptions groupOptions= processOptions(op.getGroupOptionList());
-                throw new UnsupportedOperationException("G operator is unsupported");
+            private String handleGroup(GroupOptions groupOptions, BoxList children) {
+                int gs= groupOptions.groupSize();
+                StringBuilder sb= new StringBuilder();
+
+                int rowIdx= 0;
+                for(int i=0; i < children.size(); i++) {
+                    IBox child= children.getBoxAt(i);
+                    String childStr= translation.get(child);
+
+                    if (rowIdx < gs) {
+                        
+                    }
+                }
+
+                throw new UnsupportedOperationException("G operator unsupported");
+//                return sb.toString();
             }
 
             public void endVisit(final BoxOperator__H_SpaceOptionList n) {}
