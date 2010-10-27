@@ -6,11 +6,6 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
-			<name>org.eclipse.imp.lpg.runtime.LPGBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
 			<name>org.eclipse.imp.lpg.ide.LPGBuilder</name>
 			<arguments>
 			</arguments>
@@ -43,7 +38,6 @@
 	<natures>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>org.eclipse.imp.lpg.runtime.LPGNature</nature>
 		<nature>org.eclipse.imp.smapifier.smapinature</nature>
 		<nature>org.eclipse.imp.lpg.ide.LPGNature</nature>
 	</natures>
