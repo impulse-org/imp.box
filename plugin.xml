@@ -65,7 +65,7 @@
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             objectClass="org.eclipse.core.resources.IProject"
-            adaptable="false"
+            adaptable="true"
             nameFilter="*"
             id="Box.imp.projectContextMenu">
          <action
