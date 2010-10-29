@@ -311,6 +311,8 @@
            | Space
            | HT
            | FF
+           | LF
+           | CR
            | EscapeSequence
 
     EscapeSequence -> '\' b
