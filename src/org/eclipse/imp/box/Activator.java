@@ -10,14 +10,10 @@
 *******************************************************************************/
 package org.eclipse.imp.box;
 
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.preferences.DefaultScope;
-import org.eclipse.imp.preferences.PreferencesService;
 import org.eclipse.imp.runtime.PluginBase;
 import org.osgi.framework.BundleContext;
 
 public class Activator extends PluginBase {
-
 	public static final String kPluginID = "org.eclipse.imp.box";
 
 	public static final String kLanguageName = "Box";
@@ -27,7 +23,7 @@ public class Activator extends PluginBase {
 	public static Activator getInstance() {
 		if (sPlugin == null) {
 			new Activator();
-                }
+		}
 		return sPlugin;
 	}
 
