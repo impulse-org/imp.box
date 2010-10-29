@@ -40,10 +40,8 @@ public class BoxFactory {
 		URL urlReflexive = bundle.getResource("resources/Box.trm.tbl");
 
 		try {
-			BoxParsetablePath = new File(FileLocator.toFileURL(url).getPath())
-					.toString();
-			BoxParsetablePathReflexive = new File(FileLocator.toFileURL(
-					urlReflexive).getPath()).toString();
+			BoxParsetablePath = new File(FileLocator.toFileURL(url).getPath()).toString();
+			BoxParsetablePathReflexive = new File(FileLocator.toFileURL(urlReflexive).getPath()).toString();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -61,9 +59,7 @@ public class BoxFactory {
 			Visitor v = new AbstractVisitor() {
 				private StringBuffer buffer = new StringBuffer();
 
-				public void unimplementedVisitor(String s) {
-					// do nothing
-				}
+				public void unimplementedVisitor(String s) { }
 
 				public boolean visit(Box__STRING n) {
 					String lit = n.toString();
@@ -108,15 +104,14 @@ public class BoxFactory {
 	 * @throws InterruptedException
 	 */
 	public static String box2text(String boxString) throws BoxException {
-                // RMF 2/20/2008 -t in the following puts sglr in text output mode,
-	        // which is currently required for this to work on Windows.
+	    // RMF 2/20/2008 -t in the following puts sglr in text output mode,
+	    // which is currently required for this to work on Windows.
 		String sglr = "sglr -p " + BoxParsetablePath;
 		String pandora = "pandora";
 
 		try {
 			InputStream input = Tools.cat(boxString);
-			InputStream output = Tools.pipeline(new String[] { sglr, pandora },
-					input);
+			InputStream output = Tools.pipeline(new String[] { sglr, pandora }, input);
 			return Tools.uncat(output);
 		} catch (IOException e) {
 			throw new BoxException(
@@ -127,15 +122,13 @@ public class BoxFactory {
 		}
 	}
 
-	public static String formatBox(String boxString) throws IOException,
-			InterruptedException {
+	public static String formatBox(String boxString) throws IOException, InterruptedException {
 		String sglr = "sglr -p " + BoxParsetablePathReflexive;
 		String boxFormat = "BoxFormatter";
 		String pandora = "pandora";
 
 		InputStream input = Tools.cat(boxString);
-		InputStream output = Tools.pipeline(new String[] { sglr, boxFormat,
-				pandora }, input);
+		InputStream output = Tools.pipeline(new String[] { sglr, boxFormat, pandora }, input);
 
 		return Tools.uncat(output);
 	}
