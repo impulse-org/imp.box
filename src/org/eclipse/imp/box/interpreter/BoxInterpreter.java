@@ -16,6 +16,7 @@ import java.util.Stack;
 
 import lpg.runtime.IAst;
 
+import org.eclipse.imp.box.Activator;
 import org.eclipse.imp.box.parser.Ast.*;
 
 /**
@@ -61,7 +62,20 @@ public class BoxInterpreter {
         }
     }
 
+    private static class LayoutEnvironment {
+        private int fColumn;
+
+        public LayoutEnvironment(int col) {
+            fColumn= col;
+        }
+        public int column() { return fColumn; }
+    }
+
+    private final Stack<LayoutEnvironment> fEnvStack= new Stack<LayoutEnvironment>();
+
     private final Stack<Integer> fIndentStack= new Stack<Integer>();
+
+    private final Stack<Integer> fColStack= new Stack<Integer>();
 
     private final BoxFormattingPrefs fFormattingPrefs;
 
@@ -74,6 +88,7 @@ public class BoxInterpreter {
     public BoxInterpreter(BoxFormattingPrefs prefs) {
         fFormattingPrefs= prefs;
         fCurWidth= fFormattingPrefs.PageWidth;
+        fEnvStack.push(new LayoutEnvironment(0));
     }
 
     public BoxInterpreter(int pageWidth, boolean useSpacesForTabs, int tabWidth) {
@@ -87,7 +102,7 @@ public class BoxInterpreter {
 
     private void popIndent() {
         if (fIndentStack.size() < 1) {
-            System.err.println("Unmatched call to popIndent()!");
+            Activator.getInstance().writeErrorMsg("Unmatched call to popIndent() in Box interpreter!");
             fCurWidth= fFormattingPrefs.PageWidth;
         } else {
             fCurWidth= fIndentStack.pop();
@@ -98,16 +113,12 @@ public class BoxInterpreter {
         final Map<IAst,String> translation= new HashMap<IAst, String>(); 
 
         rootNode.accept(new Visitor() {
-            private int fRemain;
-            private int fCol;
-
             {
                 initline();
             }
 
             private void initline() {
-                fRemain= fCurWidth;
-                fCol= 0;
+                fEnvStack.peek().fColumn= 0;
             }
 
             private String spaces(int num) {
@@ -116,6 +127,18 @@ public class BoxInterpreter {
                     sb.append(' ');
                 }
                 return sb.toString();
+            }
+
+            private int column() {
+                return fEnvStack.peek().fColumn;
+            }
+
+            private void consume(int cols) {
+                fEnvStack.peek().fColumn += cols;
+            }
+
+            private int remain() {
+                return fCurWidth - column();
             }
 
             private String newlines(int num) {
@@ -129,8 +152,8 @@ public class BoxInterpreter {
             private void emit(String s, StringBuilder sb) {
                 int len= s.length();
                 sb.append(s);
-                fRemain -= len;
-                fCol += len;
+                consume(len);
+//              System.out.println("After emit of " + s + ", col = " + fCol + ", remain = " + fRemain);
             }
 
             private void newlines(int num, StringBuilder sb) {
@@ -145,7 +168,7 @@ public class BoxInterpreter {
             public void postVisit(final IAst element) {}
 
             public void endVisit(final ASTNode n) {
-                System.out.println("an " + n);
+//              System.out.println("an " + n);
             }
 
             public void endVisit(final ASTNodeToken n) {
@@ -167,7 +190,7 @@ public class BoxInterpreter {
             }
 
             public void endVisit(final GroupOptionList n) {
-                System.out.println("gol " + n);
+//              System.out.println("gol " + n);
             }
 
             public void endVisit(final Box__STRING strLit) {
@@ -212,6 +235,7 @@ public class BoxInterpreter {
                     result= handleWidth(widOp, children);
                 }
                 translation.put(n, result);
+                fEnvStack.pop();
             }
 
             private SpacingOptions processOptions(SpaceOptionList optionList) {
@@ -299,18 +323,21 @@ public class BoxInterpreter {
                     IBox child= children.getBoxAt(i);
                     String childStr= translation.get(child);
                     int childWid= childStr.length();
+                    boolean childFits= remain() >= hs + childWid;
+
+//                  System.out.println("@ column = " + fCol + " of " + fCurWidth + "(" + fRemain + " remains): child = " + childStr + "; fits = " + childFits);
 
                     if (i > 0) {
-                        if (fRemain >= childWid + hs) {
+                        if (childFits) {
                             emit(spaces(hs), sb);
                         } else {
                             newlines(vs, sb);
                         }
                     }
-                    if (fRemain >= childWid) {
+                    if (childFits) {
                         emit(childStr, sb);
                     } else {
-                        if (fCol == 0) {
+                        if (column() == 0) {
                             // Child too wide to fit even a single line.
                             // Oh well, let it overflow rather than dropping it on the floor.
                             emit(childStr, sb);
@@ -337,7 +364,7 @@ public class BoxInterpreter {
 
                 StringBuilder sb= new StringBuilder();
 
-                if (totalWid <= fRemain) {
+                if (totalWid <= remain()) {
                     // lay out horizontally
                     for(int i=0; i < children.size(); i++) {
                         IBox child= children.getBoxAt(i);
@@ -371,7 +398,19 @@ public class BoxInterpreter {
                 IBox child= children.getBoxAt(0); // Only one child
 
                 popIndent();
-                return spaces(spaceOptions.indentationSpacing()) + translation.get(child);
+
+                String childStr= translation.get(child);
+                StringBuilder sb= new StringBuilder();
+                String[] childLines= childStr.split("\n");
+                String indentSpaces= spaces(spaceOptions.indentationSpacing());
+                int lineIdx=0;
+
+                for(String line: childLines) {
+                    if (lineIdx++ > 0) { sb.append('\n'); }
+                    if (line.length() > 0) { sb.append(indentSpaces); }
+                    sb.append(line);
+                }
+                return sb.toString();
             }
 
             private String handleWidth(BoxOperator__WD op, BoxList children) {
@@ -492,6 +531,7 @@ public class BoxInterpreter {
             }
 
             public boolean visit(final Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET n) {
+                fEnvStack.push(new LayoutEnvironment(column()));
                 return true;
             }
 
