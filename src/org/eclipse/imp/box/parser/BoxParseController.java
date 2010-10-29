@@ -14,6 +14,7 @@ import org.eclipse.imp.box.Activator;
 import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.parser.SimpleLPGParseController;
 import org.eclipse.imp.services.ILanguageSyntaxProperties;
+import org.eclipse.imp.services.base.LanguageSyntaxPropertiesBase;
 
 public class BoxParseController extends SimpleLPGParseController implements IParseController {
     public BoxParseController() {
@@ -29,6 +30,21 @@ public class BoxParseController extends SimpleLPGParseController implements IPar
     }
 
     public ILanguageSyntaxProperties getSyntaxProperties() {
-        return null;
+        return new LanguageSyntaxPropertiesBase() {
+            public String getSingleLineCommentPrefix() {
+                return "";
+            }
+
+            public String getBlockCommentStart() {
+                return null;
+            }
+
+            public String getBlockCommentContinuation() {
+                return null;
+            }
+
+            public String getBlockCommentEnd() {
+                return null;
+            } };
     }
 }
