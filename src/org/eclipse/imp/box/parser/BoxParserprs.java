@@ -1,7 +1,7 @@
 package org.eclipse.imp.box.parser;
 
 public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
-    public final static int ERROR_SYMBOL = 22;
+    public final static int ERROR_SYMBOL = 25;
     public final int getErrorSymbol() { return ERROR_SYMBOL; }
 
     public final static int SCOPE_UBOUND = 0;
@@ -13,46 +13,46 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
     public final static int MAX_NAME_LENGTH = 19;
     public final int getMaxNameLength() { return MAX_NAME_LENGTH; }
 
-    public final static int NUM_STATES = 23;
+    public final static int NUM_STATES = 28;
     public final int getNumStates() { return NUM_STATES; }
 
-    public final static int NT_OFFSET = 22;
+    public final static int NT_OFFSET = 25;
     public final int getNtOffset() { return NT_OFFSET; }
 
-    public final static int LA_STATE_OFFSET = 102;
+    public final static int LA_STATE_OFFSET = 112;
     public final int getLaStateOffset() { return LA_STATE_OFFSET; }
 
     public final static int MAX_LA = 1;
     public final int getMaxLa() { return MAX_LA; }
 
-    public final static int NUM_RULES = 25;
+    public final static int NUM_RULES = 27;
     public final int getNumRules() { return NUM_RULES; }
 
     public final static int NUM_NONTERMINALS = 10;
     public final int getNumNonterminals() { return NUM_NONTERMINALS; }
 
-    public final static int NUM_SYMBOLS = 32;
+    public final static int NUM_SYMBOLS = 35;
     public final int getNumSymbols() { return NUM_SYMBOLS; }
 
     public final static int SEGMENT_SIZE = 8192;
     public final int getSegmentSize() { return SEGMENT_SIZE; }
 
-    public final static int START_STATE = 26;
+    public final static int START_STATE = 28;
     public final int getStartState() { return START_STATE; }
 
     public final static int IDENTIFIER_SYMBOL = 0;
     public final int getIdentifier_SYMBOL() { return IDENTIFIER_SYMBOL; }
 
-    public final static int EOFT_SYMBOL = 17;
+    public final static int EOFT_SYMBOL = 19;
     public final int getEoftSymbol() { return EOFT_SYMBOL; }
 
-    public final static int EOLT_SYMBOL = 17;
+    public final static int EOLT_SYMBOL = 19;
     public final int getEoltSymbol() { return EOLT_SYMBOL; }
 
-    public final static int ACCEPT_ACTION = 76;
+    public final static int ACCEPT_ACTION = 84;
     public final int getAcceptAction() { return ACCEPT_ACTION; }
 
-    public final static int ERROR_ACTION = 77;
+    public final static int ERROR_ACTION = 85;
     public final int getErrorAction() { return ERROR_ACTION; }
 
     public final static boolean BACKTRACK = false;
@@ -66,8 +66,8 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
         public final static byte isNullable[] = {0,
             0,0,0,0,0,0,0,0,0,0,
             0,0,0,0,0,0,0,0,0,0,
-            0,0,1,0,0,1,0,1,1,0,
-            0,0
+            0,0,0,0,0,1,0,0,1,0,
+            1,1,0,0,0
         };
     };
     public final static byte isNullable[] = IsNullable.isNullable;
@@ -85,7 +85,7 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
         public final static byte isKeyword[] = {0,
             0,0,0,0,0,0,0,0,0,0,
             0,0,0,0,0,0,0,0,0,0,
-            0,0
+            0,0,0,0,0
         };
     };
     public final static byte isKeyword[] = IsKeyword.isKeyword;
@@ -93,14 +93,15 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
 
     public interface BaseCheck {
         public final static byte baseCheck[] = {0,
-            1,4,0,2,2,2,2,2,2,1,
-            0,2,0,2,1,1,1,1,3,1,
-            1,0,2,3,3,-1,-5,0,-22,0,
-            0,-12,0,0,0,-13,-2,0,0,-14,
-            -3,0,0,-15,-4,0,0,-16,-17,0,
-            0,0,0,0,-6,0,-7,0,-8,0,
-            -9,0,-10,-11,-18,-23,-19,-20,0,-21,
-            0,0,0,0,0
+            1,4,0,2,2,2,2,2,2,5,
+            1,0,2,0,2,1,1,1,1,1,
+            3,1,1,0,2,3,3,-1,-6,0,
+            -26,0,0,-14,0,0,0,-15,-2,0,
+            0,-16,-3,0,0,-17,-5,0,0,-18,
+            -19,0,0,0,0,0,-28,-4,0,0,
+            -7,0,-8,0,-9,0,-10,0,-11,-13,
+            -24,0,-27,-12,0,-20,-21,-22,0,-23,
+            0,-25,0
         };
     };
     public final static byte baseCheck[] = BaseCheck.baseCheck;
@@ -111,13 +112,14 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
     public interface BaseAction {
         public final static byte baseAction[] = {
             5,5,5,4,4,4,4,4,4,4,
-            4,6,6,1,1,3,3,3,3,2,
-            8,8,7,7,9,9,14,19,32,27,
-            41,37,2,24,14,68,40,61,14,68,
-            45,66,14,68,50,18,14,68,55,1,
-            14,68,64,41,12,19,36,19,40,19,
-            44,19,48,29,60,62,63,64,65,49,
-            17,77,77,23,19,77,77
+            4,4,6,6,1,1,3,3,3,3,
+            3,2,8,8,7,7,9,9,17,20,
+            34,33,43,39,2,26,15,80,34,21,
+            15,80,49,75,15,80,55,19,15,80,
+            61,1,15,80,70,43,13,67,74,15,
+            80,20,38,20,42,20,46,20,50,22,
+            73,20,57,76,77,51,78,80,81,25,
+            82,21,84,85,85
         };
     };
     public final static byte baseAction[] = BaseAction.baseAction;
@@ -127,15 +129,17 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
 
     public interface TermCheck {
         public final static byte termCheck[] = {0,
-            0,0,1,2,3,4,6,7,8,9,
-            10,11,12,0,14,15,0,0,0,6,
-            7,8,9,10,11,12,0,14,0,13,
-            0,0,6,7,8,9,10,11,12,0,
-            1,2,3,4,0,1,2,3,4,0,
-            1,2,3,4,0,1,2,3,4,0,
-            0,0,0,0,0,0,5,0,5,5,
-            0,0,0,0,0,13,0,17,19,20,
-            18,16,0,0,0,0,0,0
+            0,0,1,2,3,4,5,7,8,9,
+            10,11,12,13,14,15,0,17,0,0,
+            0,0,0,7,8,9,10,11,12,13,
+            14,15,0,0,1,2,3,4,5,19,
+            8,9,10,11,12,13,14,15,0,1,
+            2,3,4,5,0,1,2,3,4,5,
+            0,1,2,3,4,5,0,1,2,3,
+            4,5,0,0,0,0,0,0,0,0,
+            0,0,6,0,7,6,6,6,0,0,
+            0,16,18,21,22,20,23,0,0,16,
+            0,0,0,0,0,0,0,0,0
         };
     };
     public final static byte termCheck[] = TermCheck.termCheck;
@@ -143,15 +147,16 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
 
     public interface TermAction {
         public final static byte termAction[] = {0,
-            3,8,94,92,93,95,61,59,57,55,
-            27,87,45,3,78,79,77,22,13,61,
-            59,57,55,27,87,45,3,78,11,102,
-            77,77,61,59,57,55,27,87,45,7,
-            94,92,93,95,6,94,92,93,95,5,
-            94,92,93,95,4,94,92,93,95,9,
-            77,77,77,77,77,77,70,77,29,66,
-            77,77,77,77,77,97,77,76,67,65,
-            98,63
+            3,8,101,102,103,104,105,86,67,65,
+            63,61,29,96,47,58,3,87,24,14,
+            85,12,85,86,67,65,63,61,29,96,
+            47,58,3,7,101,102,103,104,105,84,
+            67,65,63,61,29,96,47,58,6,101,
+            102,103,104,105,5,101,102,103,104,105,
+            4,101,102,103,104,105,10,101,102,103,
+            104,105,9,85,85,85,85,85,85,85,
+            85,85,76,85,71,82,31,73,85,85,
+            85,107,69,77,78,108,74,85,85,112
         };
     };
     public final static byte termAction[] = TermAction.termAction;
@@ -159,9 +164,9 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
 
     public interface Asb {
         public final static byte asb[] = {0,
-            23,20,18,16,1,1,1,1,1,22,
-            16,1,1,1,1,1,22,33,33,33,
-            36,9,35
+            27,22,20,24,18,1,1,1,1,1,
+            26,41,18,1,1,1,1,1,26,36,
+            41,41,41,1,39,10,38,1
         };
     };
     public final static byte asb[] = Asb.asb;
@@ -169,10 +174,11 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
 
     public interface Asr {
         public final static byte asr[] = {0,
-            16,1,2,3,19,20,4,0,6,7,
-            8,9,10,12,11,19,20,16,0,17,
-            0,15,16,6,7,8,9,10,12,11,
-            14,0,5,0,18,13,0
+            18,1,21,2,3,22,4,5,0,8,
+            9,10,11,12,14,15,13,21,22,18,
+            0,19,0,23,0,17,18,8,9,10,
+            11,12,14,15,13,7,0,20,16,0,
+            6,0
         };
     };
     public final static byte asr[] = Asr.asr;
@@ -180,9 +186,9 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
 
     public interface Nasb {
         public final static byte nasb[] = {0,
-            1,8,8,9,4,4,4,4,4,11,
-            13,6,6,6,6,6,1,8,8,8,
-            8,2,15
+            1,8,8,8,9,4,4,4,4,4,
+            11,8,13,6,6,6,6,6,1,8,
+            8,8,8,4,8,2,15,6
         };
     };
     public final static byte nasb[] = Nasb.nasb;
@@ -199,9 +205,9 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
 
     public interface TerminalIndex {
         public final static byte terminalIndex[] = {0,
-            17,18,19,22,3,10,11,12,13,14,
-            15,16,5,8,1,2,6,9,20,21,
-            7,23
+            18,20,21,24,25,3,8,10,11,12,
+            13,14,15,16,17,5,1,2,6,9,
+            19,22,23,7,26
         };
     };
     public final static byte terminalIndex[] = TerminalIndex.terminalIndex;
@@ -209,7 +215,7 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
 
     public interface NonterminalIndex {
         public final static byte nonterminalIndex[] = {0,
-            0,25,26,0,24,0,0,27,28,0
+            0,28,29,0,27,0,0,30,31,0
         };
     };
     public final static byte nonterminalIndex[] = NonterminalIndex.nonterminalIndex;
@@ -241,7 +247,7 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
 
     public interface ScopeLa {
         public final static byte scopeLa[] = {
-            15
+            17
         };
     };
     public final static byte scopeLa[] = ScopeLa.scopeLa;
@@ -257,7 +263,7 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
 
     public interface ScopeRhs {
         public final static byte scopeRhs[] = {0,
-            28,16,26,0,15,0
+            31,18,29,0,17,0
         };
     };
     public final static byte scopeRhs[] = ScopeRhs.scopeRhs;
@@ -265,7 +271,7 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
 
     public interface ScopeState {
         public final static byte scopeState[] = {0,
-            49,26,0
+            51,28,0
         };
     };
     public final static byte scopeState[] = ScopeState.scopeState;
@@ -273,9 +279,9 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
 
     public interface InSymb {
         public final static byte inSymb[] = {0,
-            0,27,26,12,10,9,8,7,6,16,
-            29,23,23,23,23,23,28,20,19,25,
-            5,5,5
+            0,30,29,15,14,12,11,10,9,8,
+            18,23,32,26,26,26,26,26,31,6,
+            21,22,28,7,6,6,6,26
         };
     };
     public final static byte inSymb[] = InSymb.inSymb;
@@ -300,12 +306,15 @@ public class BoxParserprs implements lpg.runtime.ParseTable, BoxParsersym {
             "I",
             "WD",
             "G",
-            "is",
-            "vs",
-            "hs",
-            "op",
+            "SL",
+            "cs",
             "gs",
+            "hs",
+            "is",
+            "op",
+            "sep",
             "ts",
+            "vs",
             "ERROR_TOKEN",
             "Box",
             "SpaceOption",

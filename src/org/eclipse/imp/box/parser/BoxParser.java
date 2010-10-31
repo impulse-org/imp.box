@@ -260,86 +260,107 @@ public class BoxParser implements RuleAction, IParser
                 break;
             }
             //
-            // Rule 10:  BoxOperator ::= WD
+            // Rule 10:  BoxOperator ::= SL sep$ =$ STRING$sep SpaceOptionList
             //
             case 10: {
+                setResult(
+                    new BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList(getLeftIToken(), getRightIToken(),
+                                                                         new ASTNodeToken(getRhsIToken(1)),
+                                                                         new ASTNodeToken(getRhsIToken(4)),
+                                                                         (SpaceOptionList)getRhsSym(5))
+                );
+                break;
+            }
+            //
+            // Rule 11:  BoxOperator ::= WD
+            //
+            case 11: {
                 setResult(
                     new BoxOperator__WD(getRhsIToken(1))
                 );
                 break;
             }
             //
-            // Rule 11:  BoxList ::= $Empty
+            // Rule 12:  BoxList ::= $Empty
             //
-            case 11: {
+            case 12: {
                 setResult(
                     new BoxList(getLeftIToken(), getRightIToken(), true /* left recursive */)
                 );
                 break;
             }
             //
-            // Rule 12:  BoxList ::= BoxList Box
+            // Rule 13:  BoxList ::= BoxList Box
             //
-            case 12: {
+            case 13: {
                 ((BoxList)getRhsSym(1)).add((IBox)getRhsSym(2));
                 break;
             }
             //
-            // Rule 13:  SpaceOptionList ::= $Empty
+            // Rule 14:  SpaceOptionList ::= $Empty
             //
-            case 13: {
+            case 14: {
                 setResult(
                     new SpaceOptionList(getLeftIToken(), getRightIToken(), true /* left recursive */)
                 );
                 break;
             }
             //
-            // Rule 14:  SpaceOptionList ::= SpaceOptionList SpaceOption
+            // Rule 15:  SpaceOptionList ::= SpaceOptionList SpaceOption
             //
-            case 14: {
+            case 15: {
                 ((SpaceOptionList)getRhsSym(1)).add((SpaceOption)getRhsSym(2));
                 break;
             }
             //
-            // Rule 15:  SpaceSymbol ::= vs
+            // Rule 16:  SpaceSymbol ::= cs
             //
-            case 15: {
+            case 16: {
                 setResult(
-                    new SpaceSymbol__vs(getRhsIToken(1))
+                    new SpaceSymbol__cs(getRhsIToken(1))
                 );
                 break;
             }
             //
-            // Rule 16:  SpaceSymbol ::= hs
+            // Rule 17:  SpaceSymbol ::= hs
             //
-            case 16: {
+            case 17: {
                 setResult(
                     new SpaceSymbol__hs(getRhsIToken(1))
                 );
                 break;
             }
             //
-            // Rule 17:  SpaceSymbol ::= is
+            // Rule 18:  SpaceSymbol ::= is
             //
-            case 17: {
+            case 18: {
                 setResult(
                     new SpaceSymbol__is(getRhsIToken(1))
                 );
                 break;
             }
             //
-            // Rule 18:  SpaceSymbol ::= ts
+            // Rule 19:  SpaceSymbol ::= ts
             //
-            case 18: {
+            case 19: {
                 setResult(
                     new SpaceSymbol__ts(getRhsIToken(1))
                 );
                 break;
             }
             //
-            // Rule 19:  SpaceOption ::= SpaceSymbol =$ SpaceValue
+            // Rule 20:  SpaceSymbol ::= vs
             //
-            case 19: {
+            case 20: {
+                setResult(
+                    new SpaceSymbol__vs(getRhsIToken(1))
+                );
+                break;
+            }
+            //
+            // Rule 21:  SpaceOption ::= SpaceSymbol =$ SpaceValue
+            //
+            case 21: {
                 setResult(
                     new SpaceOption(getLeftIToken(), getRightIToken(),
                                     (ISpaceSymbol)getRhsSym(1),
@@ -348,43 +369,43 @@ public class BoxParser implements RuleAction, IParser
                 break;
             }
             //
-            // Rule 20:  SpaceValue ::= NUMBER
+            // Rule 22:  SpaceValue ::= NUMBER
             //
-            case 20: {
+            case 22: {
                 setResult(
                     new SpaceValue__NUMBER(getRhsIToken(1))
                 );
                 break;
             }
             //
-            // Rule 21:  SpaceValue ::= IDENT
+            // Rule 23:  SpaceValue ::= IDENT
             //
-            case 21: {
+            case 23: {
                 setResult(
                     new SpaceValue__IDENT(getRhsIToken(1))
                 );
                 break;
             }
             //
-            // Rule 22:  GroupOptionList ::= $Empty
+            // Rule 24:  GroupOptionList ::= $Empty
             //
-            case 22: {
+            case 24: {
                 setResult(
                     new GroupOptionList(getLeftIToken(), getRightIToken(), true /* left recursive */)
                 );
                 break;
             }
             //
-            // Rule 23:  GroupOptionList ::= GroupOptionList GroupOption
+            // Rule 25:  GroupOptionList ::= GroupOptionList GroupOption
             //
-            case 23: {
+            case 25: {
                 ((GroupOptionList)getRhsSym(1)).add((IGroupOption)getRhsSym(2));
                 break;
             }
             //
-            // Rule 24:  GroupOption ::= op =$ BoxOperator
+            // Rule 26:  GroupOption ::= op =$ BoxOperator
             //
-            case 24: {
+            case 26: {
                 setResult(
                     new GroupOption__op_EQUAL_BoxOperator(getLeftIToken(), getRightIToken(),
                                                           new ASTNodeToken(getRhsIToken(1)),
@@ -393,9 +414,9 @@ public class BoxParser implements RuleAction, IParser
                 break;
             }
             //
-            // Rule 25:  GroupOption ::= gs =$ NUMBER
+            // Rule 27:  GroupOption ::= gs =$ NUMBER
             //
-            case 25: {
+            case 27: {
                 setResult(
                     new GroupOption__gs_EQUAL_NUMBER(getLeftIToken(), getRightIToken(),
                                                      new ASTNodeToken(getRhsIToken(1)),

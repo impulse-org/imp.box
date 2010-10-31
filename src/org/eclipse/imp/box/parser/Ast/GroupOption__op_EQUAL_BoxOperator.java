@@ -6,7 +6,7 @@ import org.eclipse.imp.parser.IParser;
 
 /**
  *<b>
- *<li>Rule 24:  GroupOption ::= op =$ BoxOperator
+ *<li>Rule 26:  GroupOption ::= op =$ BoxOperator
  *</b>
  */
 public class GroupOption__op_EQUAL_BoxOperator extends ASTNode implements IGroupOption

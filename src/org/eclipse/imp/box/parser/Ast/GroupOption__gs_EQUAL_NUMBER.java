@@ -6,7 +6,7 @@ import org.eclipse.imp.parser.IParser;
 
 /**
  *<b>
- *<li>Rule 25:  GroupOption ::= gs =$ NUMBER
+ *<li>Rule 27:  GroupOption ::= gs =$ NUMBER
  *</b>
  */
 public class GroupOption__gs_EQUAL_NUMBER extends ASTNode implements IGroupOption

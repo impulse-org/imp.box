@@ -6,7 +6,7 @@ import org.eclipse.imp.parser.IParser;
 
 /**
  *<b>
- *<li>Rule 21:  SpaceValue ::= IDENT
+ *<li>Rule 23:  SpaceValue ::= IDENT
  *</b>
  */
 public class SpaceValue__IDENT extends ASTNodeToken implements ISpaceValue

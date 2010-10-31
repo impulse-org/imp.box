@@ -406,188 +406,215 @@ public class BoxLexer implements RuleAction, ILexer
         {
 
             //
-            // Rule 1:  Token ::= V
+            // Rule 1:  Token ::= G
             //
             case 1: { 
-            
-                makeToken(BoxParsersym.TK_V);
-                  break;
-            }
-    
-            //
-            // Rule 2:  Token ::= H
-            //
-            case 2: { 
-            
-                makeToken(BoxParsersym.TK_H);
-                  break;
-            }
-    
-            //
-            // Rule 3:  Token ::= H O V
-            //
-            case 3: { 
-            
-                makeToken(BoxParsersym.TK_HOV);
-                  break;
-            }
-    
-            //
-            // Rule 4:  Token ::= H V
-            //
-            case 4: { 
-            
-                makeToken(BoxParsersym.TK_HV);
-                  break;
-            }
-    
-            //
-            // Rule 5:  Token ::= i s
-            //
-            case 5: { 
-            
-                makeToken(BoxParsersym.TK_is);
-                  break;
-            }
-    
-            //
-            // Rule 6:  Token ::= h s
-            //
-            case 6: { 
-            
-                makeToken(BoxParsersym.TK_hs);
-                  break;
-            }
-    
-            //
-            // Rule 7:  Token ::= v s
-            //
-            case 7: { 
-            
-                makeToken(BoxParsersym.TK_vs);
-                  break;
-            }
-    
-            //
-            // Rule 8:  Token ::= o p
-            //
-            case 8: { 
-            
-                makeToken(BoxParsersym.TK_op);
-                  break;
-            }
-    
-            //
-            // Rule 9:  Token ::= g s
-            //
-            case 9: { 
-            
-                makeToken(BoxParsersym.TK_gs);
-                  break;
-            }
-    
-            //
-            // Rule 10:  Token ::= t s
-            //
-            case 10: { 
-            
-                makeToken(BoxParsersym.TK_ts);
-                  break;
-            }
-    
-            //
-            // Rule 11:  Token ::= W D
-            //
-            case 11: { 
-            
-                makeToken(BoxParsersym.TK_WD);
-                  break;
-            }
-    
-            //
-            // Rule 12:  Token ::= G
-            //
-            case 12: { 
             
                 makeToken(BoxParsersym.TK_G);
                   break;
             }
     
             //
-            // Rule 13:  Token ::= I
+            // Rule 2:  Token ::= I
             //
-            case 13: { 
+            case 2: { 
             
                 makeToken(BoxParsersym.TK_I);
                   break;
             }
     
             //
-            // Rule 14:  Token ::= number
+            // Rule 3:  Token ::= H
+            //
+            case 3: { 
+            
+                makeToken(BoxParsersym.TK_H);
+                  break;
+            }
+    
+            //
+            // Rule 4:  Token ::= H O V
+            //
+            case 4: { 
+            
+                makeToken(BoxParsersym.TK_HOV);
+                  break;
+            }
+    
+            //
+            // Rule 5:  Token ::= H V
+            //
+            case 5: { 
+            
+                makeToken(BoxParsersym.TK_HV);
+                  break;
+            }
+    
+            //
+            // Rule 6:  Token ::= S L
+            //
+            case 6: { 
+            
+                makeToken(BoxParsersym.TK_SL);
+                  break;
+            }
+    
+            //
+            // Rule 7:  Token ::= V
+            //
+            case 7: { 
+            
+                makeToken(BoxParsersym.TK_V);
+                  break;
+            }
+    
+            //
+            // Rule 8:  Token ::= W D
+            //
+            case 8: { 
+            
+                makeToken(BoxParsersym.TK_WD);
+                  break;
+            }
+    
+            //
+            // Rule 9:  Token ::= c s
+            //
+            case 9: { 
+            
+                makeToken(BoxParsersym.TK_cs);
+                  break;
+            }
+    
+            //
+            // Rule 10:  Token ::= g s
+            //
+            case 10: { 
+            
+                makeToken(BoxParsersym.TK_gs);
+                  break;
+            }
+    
+            //
+            // Rule 11:  Token ::= h s
+            //
+            case 11: { 
+            
+                makeToken(BoxParsersym.TK_hs);
+                  break;
+            }
+    
+            //
+            // Rule 12:  Token ::= i s
+            //
+            case 12: { 
+            
+                makeToken(BoxParsersym.TK_is);
+                  break;
+            }
+    
+            //
+            // Rule 13:  Token ::= o p
+            //
+            case 13: { 
+            
+                makeToken(BoxParsersym.TK_op);
+                  break;
+            }
+    
+            //
+            // Rule 14:  Token ::= s e p
             //
             case 14: { 
+            
+                makeToken(BoxParsersym.TK_sep);
+                  break;
+            }
+    
+            //
+            // Rule 15:  Token ::= t s
+            //
+            case 15: { 
+            
+                makeToken(BoxParsersym.TK_ts);
+                  break;
+            }
+    
+            //
+            // Rule 16:  Token ::= v s
+            //
+            case 16: { 
+            
+                makeToken(BoxParsersym.TK_vs);
+                  break;
+            }
+    
+            //
+            // Rule 17:  Token ::= number
+            //
+            case 17: { 
             
                 makeToken(BoxParsersym.TK_NUMBER);
                   break;
             }
     
             //
-            // Rule 15:  Token ::= " SLBody "
+            // Rule 18:  Token ::= " SLBody "
             //
-            case 15: { 
+            case 18: { 
                 makeToken(BoxParsersym.TK_STRING);
                   break;
             }
     
             //
-            // Rule 16:  Token ::= white
+            // Rule 19:  Token ::= white
             //
-            case 16: { 
+            case 19: { 
             
                 skipToken();
                   break;
             }
     
             //
-            // Rule 17:  Token ::= slc
+            // Rule 20:  Token ::= slc
             //
-            case 17: { 
+            case 20: { 
             
                 makeComment(BoxParsersym.TK_SINGLE_LINE_COMMENT);
                   break;
             }
     
             //
-            // Rule 18:  Token ::= =
+            // Rule 21:  Token ::= =
             //
-            case 18: { 
+            case 21: { 
             
                 makeToken(BoxParsersym.TK_EQUAL);
                   break;
             }
     
             //
-            // Rule 19:  Token ::= [
+            // Rule 22:  Token ::= [
             //
-            case 19: { 
+            case 22: { 
             
                 makeToken(BoxParsersym.TK_LEFTBRACKET);
                   break;
             }
     
             //
-            // Rule 20:  Token ::= ]
+            // Rule 23:  Token ::= ]
             //
-            case 20: { 
+            case 23: { 
             
                 makeToken(BoxParsersym.TK_RIGHTBRACKET);
                   break;
             }
     
             //
-            // Rule 21:  Token ::= id
+            // Rule 24:  Token ::= id
             //
-            case 21: { 
+            case 24: { 
             
                  makeToken(BoxParsersym.TK_IDENT);
                   break;

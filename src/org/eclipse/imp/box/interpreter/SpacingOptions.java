@@ -18,6 +18,7 @@ public class SpacingOptions {
     int fVerticalSpacing= 0;
     int fIndentationSpacing= 4;
     int fTabStopSpacing= 4;
+    int fSeparatorSpacing= 0;
     private int fGroupSize= 4;
     private Alignment fAlignment= Alignment.LEFT;
 
@@ -74,6 +75,10 @@ public class SpacingOptions {
 
     public int indentationSpacing() {
         return fIndentationSpacing;
+    }
+
+    public int separatorSpacing() {
+        return fSeparatorSpacing;
     }
 
     public int tabStopSpacing() {

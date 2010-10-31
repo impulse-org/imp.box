@@ -6,7 +6,7 @@ import org.eclipse.imp.parser.IParser;
 
 /**
  *<b>
- *<li>Rule 19:  SpaceOption ::= SpaceSymbol =$ SpaceValue
+ *<li>Rule 21:  SpaceOption ::= SpaceSymbol =$ SpaceValue
  *</b>
  */
 public class SpaceOption extends ASTNode implements ISpaceOption

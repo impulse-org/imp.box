@@ -16,11 +16,13 @@ import org.eclipse.imp.parser.IParser;
  *<li>BoxOperator__HOV_SpaceOptionList
  *<li>BoxOperator__I_SpaceOptionList
  *<li>BoxOperator__G_GroupOptionList
+ *<li>BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList
  *<li>BoxOperator__WD
- *<li>SpaceSymbol__vs
+ *<li>SpaceSymbol__cs
  *<li>SpaceSymbol__hs
  *<li>SpaceSymbol__is
  *<li>SpaceSymbol__ts
+ *<li>SpaceSymbol__vs
  *<li>SpaceValue__NUMBER
  *<li>SpaceValue__IDENT
  *</ul>

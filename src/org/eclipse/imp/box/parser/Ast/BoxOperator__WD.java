@@ -6,7 +6,7 @@ import org.eclipse.imp.parser.IParser;
 
 /**
  *<b>
- *<li>Rule 10:  BoxOperator ::= WD
+ *<li>Rule 11:  BoxOperator ::= WD
  *</b>
  */
 public class BoxOperator__WD extends ASTNodeToken implements IBoxOperator

@@ -6,14 +6,14 @@ import org.eclipse.imp.parser.IParser;
 
 /**
  *<b>
- *<li>Rule 22:  SpaceValue ::= NUMBER
+ *<li>Rule 16:  SpaceSymbol ::= cs
  *</b>
  */
-public class SpaceValue__NUMBER extends ASTNodeToken implements ISpaceValue
+public class SpaceSymbol__cs extends ASTNodeToken implements ISpaceSymbol
 {
-    public IToken getNUMBER() { return leftIToken; }
+    public IToken getcs() { return leftIToken; }
 
-    public SpaceValue__NUMBER(IToken token) { super(token); initialize(); }
+    public SpaceSymbol__cs(IToken token) { super(token); initialize(); }
 
     public void accept(IAstVisitor v)
     {

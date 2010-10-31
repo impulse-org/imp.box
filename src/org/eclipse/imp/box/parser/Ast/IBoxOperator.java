@@ -10,6 +10,7 @@ package org.eclipse.imp.box.parser.Ast;
  *<li>BoxOperator__HOV_SpaceOptionList
  *<li>BoxOperator__I_SpaceOptionList
  *<li>BoxOperator__G_GroupOptionList
+ *<li>BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList
  *<li>BoxOperator__WD
  *</ul>
  *</b>

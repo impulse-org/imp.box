@@ -48,6 +48,7 @@
          | 'HOV' SpaceOptionList 
          | 'I' SpaceOptionList 
          | 'G' GroupOptionList
+         | 'SL' 'sep'$ '='$ STRING$sep SpaceOptionList
          | 'WD'
 
    BoxList$$Box ::= %Empty
@@ -56,10 +57,11 @@
    SpaceOptionList$$SpaceOption ::= %Empty
                                  | SpaceOptionList SpaceOption
 
-   SpaceSymbol ::= 'vs'
+   SpaceSymbol ::= 'cs'
                  | 'hs'
                  | 'is'
                  | 'ts'
+                 | 'vs'
 
    SpaceOption ::= SpaceSymbol '='$ SpaceValue
 

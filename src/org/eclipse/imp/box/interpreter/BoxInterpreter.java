@@ -15,9 +15,41 @@ import java.util.Map;
 import java.util.Stack;
 
 import lpg.runtime.IAst;
+import lpg.runtime.IToken;
 
 import org.eclipse.imp.box.Activator;
-import org.eclipse.imp.box.parser.Ast.*;
+import org.eclipse.imp.box.parser.BoxParsersym;
+import org.eclipse.imp.box.parser.Ast.ASTNode;
+import org.eclipse.imp.box.parser.Ast.ASTNodeToken;
+import org.eclipse.imp.box.parser.Ast.BoxList;
+import org.eclipse.imp.box.parser.Ast.BoxOperator__G_GroupOptionList;
+import org.eclipse.imp.box.parser.Ast.BoxOperator__HOV_SpaceOptionList;
+import org.eclipse.imp.box.parser.Ast.BoxOperator__HV_SpaceOptionList;
+import org.eclipse.imp.box.parser.Ast.BoxOperator__H_SpaceOptionList;
+import org.eclipse.imp.box.parser.Ast.BoxOperator__I_SpaceOptionList;
+import org.eclipse.imp.box.parser.Ast.BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList;
+import org.eclipse.imp.box.parser.Ast.BoxOperator__V_SpaceOptionList;
+import org.eclipse.imp.box.parser.Ast.BoxOperator__WD;
+import org.eclipse.imp.box.parser.Ast.Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET;
+import org.eclipse.imp.box.parser.Ast.Box__STRING;
+import org.eclipse.imp.box.parser.Ast.GroupOptionList;
+import org.eclipse.imp.box.parser.Ast.GroupOption__gs_EQUAL_NUMBER;
+import org.eclipse.imp.box.parser.Ast.GroupOption__op_EQUAL_BoxOperator;
+import org.eclipse.imp.box.parser.Ast.IBox;
+import org.eclipse.imp.box.parser.Ast.IBoxOperator;
+import org.eclipse.imp.box.parser.Ast.IGroupOption;
+import org.eclipse.imp.box.parser.Ast.ISpaceSymbol;
+import org.eclipse.imp.box.parser.Ast.ISpaceValue;
+import org.eclipse.imp.box.parser.Ast.SpaceOption;
+import org.eclipse.imp.box.parser.Ast.SpaceOptionList;
+import org.eclipse.imp.box.parser.Ast.SpaceSymbol__cs;
+import org.eclipse.imp.box.parser.Ast.SpaceSymbol__hs;
+import org.eclipse.imp.box.parser.Ast.SpaceSymbol__is;
+import org.eclipse.imp.box.parser.Ast.SpaceSymbol__ts;
+import org.eclipse.imp.box.parser.Ast.SpaceSymbol__vs;
+import org.eclipse.imp.box.parser.Ast.SpaceValue__IDENT;
+import org.eclipse.imp.box.parser.Ast.SpaceValue__NUMBER;
+import org.eclipse.imp.box.parser.Ast.Visitor;
 
 /**
  * @author rfuhrer
@@ -28,7 +60,7 @@ public class BoxInterpreter {
     }
 
     public enum BoxOperator {
-        H, V, HV, HOV, I, G, WD // , A, R, SL
+        H, V, HV, HOV, I, G, WD, SL // , A, R
     }
 
     public static class GroupOptions {
@@ -74,8 +106,6 @@ public class BoxInterpreter {
     private final Stack<LayoutEnvironment> fEnvStack= new Stack<LayoutEnvironment>();
 
     private final Stack<Integer> fIndentStack= new Stack<Integer>();
-
-    private final Stack<Integer> fColStack= new Stack<Integer>();
 
     private final BoxFormattingPrefs fFormattingPrefs;
 
@@ -153,7 +183,6 @@ public class BoxInterpreter {
                 int len= s.length();
                 sb.append(s);
                 consume(len);
-//              System.out.println("After emit of " + s + ", col = " + fCol + ", remain = " + fRemain);
             }
 
             private void newlines(int num, StringBuilder sb) {
@@ -167,13 +196,9 @@ public class BoxInterpreter {
 
             public void postVisit(final IAst element) {}
 
-            public void endVisit(final ASTNode n) {
-//              System.out.println("an " + n);
-            }
+            public void endVisit(final ASTNode n) { }
 
-            public void endVisit(final ASTNodeToken n) {
-//              System.out.println("ant " + n);
-            }
+            public void endVisit(final ASTNodeToken n) { }
 
             public void endVisit(final BoxList n) {
                 // only appears as a child of a Box; taken care of there
@@ -185,13 +210,9 @@ public class BoxInterpreter {
 //              System.out.println("sol " + n);
             }
 
-            public void endVisit(final SpaceOption n) {
-//              System.out.println("so " + n);
-            }
+            public void endVisit(final SpaceOption n) { }
 
-            public void endVisit(final GroupOptionList n) {
-//              System.out.println("gol " + n);
-            }
+            public void endVisit(final GroupOptionList n) { }
 
             public void endVisit(final Box__STRING strLit) {
                 String strLitStr= strLit.toString();
@@ -233,6 +254,11 @@ public class BoxInterpreter {
                     BoxOperator__WD widOp= (BoxOperator__WD) op;
 
                     result= handleWidth(widOp, children);
+                } else if (op instanceof BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList) {
+                    BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList slOp= (BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList) op;
+                    String sepStr= slOp.getsep().toString();
+
+                    result= handleSeparatedList(sepStr.substring(1, sepStr.length()-1), processOptions(slOp.getSpaceOptionList()), children);
                 }
                 translation.put(n, result);
                 fEnvStack.pop();
@@ -259,6 +285,9 @@ public class BoxInterpreter {
                     } else if (sym instanceof SpaceSymbol__ts) {
                         // ts
                         result.fTabStopSpacing= ival;
+                    } else if (sym instanceof SpaceSymbol__cs) {
+                        // cs
+                        result.fSeparatorSpacing= ival;
                     } 
                 }
                 return result;
@@ -324,8 +353,6 @@ public class BoxInterpreter {
                     String childStr= translation.get(child);
                     int childWid= childStr.length();
                     boolean childFits= remain() >= hs + childWid;
-
-//                  System.out.println("@ column = " + fCol + " of " + fCurWidth + "(" + fRemain + " remains): child = " + childStr + "; fits = " + childFits);
 
                     if (i > 0) {
                         if (childFits) {
@@ -413,6 +440,40 @@ public class BoxInterpreter {
                 return sb.toString();
             }
 
+            private String handleSeparatedList(String sep, SpacingOptions spaceOptions, BoxList children) {
+                // Syntactic sugar for the following:
+                // HV hs=hs vs=vs [ H hs=cs [ child1 sep ] H hs=cs [ child2 sep ] ... childN ]
+
+                IToken dummyToken= new SyntheticToken(BoxParsersym.TK_NUMBER, "0"); // used as a dummy token in various constructors below
+                SpacingOptions hvOptions= SpacingOptions.hsvs(spaceOptions.horizontalSpacing(), spaceOptions.verticalSpacing());
+                BoxList hvChildren= new BoxList(dummyToken, dummyToken, true);
+
+                // Handle the first N-1 children -- they need a surrounding H-box
+                for(int i=0; i < children.size()-1; i++) {
+                    IBox child= children.getBoxAt(i);
+                    BoxOperator__H_SpaceOptionList hOp= new BoxOperator__H_SpaceOptionList(dummyToken, dummyToken, new ASTNodeToken(new SyntheticToken(BoxParsersym.TK_H, "H")), new SpaceOptionList(dummyToken, dummyToken, true));
+                    Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET hBox= new Box__BoxOperator_LEFTBRACKET_BoxList_RIGHTBRACKET(dummyToken, dummyToken, hOp, new BoxList(dummyToken, dummyToken, true));
+                    IBox sepChild= new Box__STRING(new SyntheticToken(BoxParsersym.TK_STRING, sep));
+                    BoxList hBoxChildList= hBox.getBoxList();
+
+                    hBoxChildList.add(child);
+                    hBoxChildList.add(sepChild);
+
+                    // fake translation of synthetic nodes
+                    translation.put((IAst) sepChild, sep);
+                    String hBoxStr= handleHorizontal(SpacingOptions.hs(spaceOptions.separatorSpacing()), hBoxChildList);
+                    translation.put(hBox, hBoxStr);
+
+                    hvChildren.add((IBox) hBox);
+                }
+
+                // Handle the last child - it doesn't need a surrounding H-box
+                if (children.size() > 0) {
+                    hvChildren.add(children.getBoxAt(children.size()-1));
+                }
+                return handleHV(hvOptions, hvChildren);
+            }
+
             private String handleWidth(BoxOperator__WD op, BoxList children) {
                 throw new UnsupportedOperationException("WD operator not supported");
             }
@@ -472,27 +533,20 @@ public class BoxInterpreter {
 //                return sb.toString();
             }
 
-            public void endVisit(final BoxOperator__H_SpaceOptionList n) {}
-
-            public void endVisit(final BoxOperator__V_SpaceOptionList n) {}
-
-            public void endVisit(final BoxOperator__HV_SpaceOptionList n) {}
-
-            public void endVisit(final BoxOperator__HOV_SpaceOptionList n) {}
-
-            public void endVisit(final BoxOperator__I_SpaceOptionList n) {}
-
             public void endVisit(final BoxOperator__G_GroupOptionList n) {}
-
+            public void endVisit(final BoxOperator__H_SpaceOptionList n) {}
+            public void endVisit(final BoxOperator__HOV_SpaceOptionList n) {}
+            public void endVisit(final BoxOperator__HV_SpaceOptionList n) {}
+            public void endVisit(final BoxOperator__I_SpaceOptionList n) {}
+            public void endVisit(final BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList n) {}
+            public void endVisit(final BoxOperator__V_SpaceOptionList n) {}
             public void endVisit(final BoxOperator__WD n) {}
 
-            public void endVisit(final SpaceSymbol__vs n) {}
-
+            public void endVisit(final SpaceSymbol__cs n) {}
             public void endVisit(final SpaceSymbol__hs n) {}
-
             public void endVisit(final SpaceSymbol__is n) {}
-
             public void endVisit(final SpaceSymbol__ts n) {}
+            public void endVisit(final SpaceSymbol__vs n) {}
 
             public void endVisit(final SpaceValue__NUMBER n) {}
 
@@ -562,11 +616,15 @@ public class BoxInterpreter {
                 return true;
             }
 
+            public boolean visit(final BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList n) {
+                return true;
+            }
+
             public boolean visit(final BoxOperator__WD op) {
                 return true;
             }
 
-            public boolean visit(final SpaceSymbol__vs n) {
+            public boolean visit(final SpaceSymbol__cs n) {
                 return true;
             }
 
@@ -579,6 +637,10 @@ public class BoxInterpreter {
             }
 
             public boolean visit(final SpaceSymbol__ts n) {
+                return true;
+            }
+
+            public boolean visit(final SpaceSymbol__vs n) {
                 return true;
             }
 

@@ -51,11 +51,14 @@ public abstract class AbstractVisitor implements Visitor
     public boolean visit(BoxOperator__G_GroupOptionList n) { unimplementedVisitor("visit(BoxOperator__G_GroupOptionList)"); return true; }
     public void endVisit(BoxOperator__G_GroupOptionList n) { unimplementedVisitor("endVisit(BoxOperator__G_GroupOptionList)"); }
 
+    public boolean visit(BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList n) { unimplementedVisitor("visit(BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList)"); return true; }
+    public void endVisit(BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList n) { unimplementedVisitor("endVisit(BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList)"); }
+
     public boolean visit(BoxOperator__WD n) { unimplementedVisitor("visit(BoxOperator__WD)"); return true; }
     public void endVisit(BoxOperator__WD n) { unimplementedVisitor("endVisit(BoxOperator__WD)"); }
 
-    public boolean visit(SpaceSymbol__vs n) { unimplementedVisitor("visit(SpaceSymbol__vs)"); return true; }
-    public void endVisit(SpaceSymbol__vs n) { unimplementedVisitor("endVisit(SpaceSymbol__vs)"); }
+    public boolean visit(SpaceSymbol__cs n) { unimplementedVisitor("visit(SpaceSymbol__cs)"); return true; }
+    public void endVisit(SpaceSymbol__cs n) { unimplementedVisitor("endVisit(SpaceSymbol__cs)"); }
 
     public boolean visit(SpaceSymbol__hs n) { unimplementedVisitor("visit(SpaceSymbol__hs)"); return true; }
     public void endVisit(SpaceSymbol__hs n) { unimplementedVisitor("endVisit(SpaceSymbol__hs)"); }
@@ -65,6 +68,9 @@ public abstract class AbstractVisitor implements Visitor
 
     public boolean visit(SpaceSymbol__ts n) { unimplementedVisitor("visit(SpaceSymbol__ts)"); return true; }
     public void endVisit(SpaceSymbol__ts n) { unimplementedVisitor("endVisit(SpaceSymbol__ts)"); }
+
+    public boolean visit(SpaceSymbol__vs n) { unimplementedVisitor("visit(SpaceSymbol__vs)"); return true; }
+    public void endVisit(SpaceSymbol__vs n) { unimplementedVisitor("endVisit(SpaceSymbol__vs)"); }
 
     public boolean visit(SpaceValue__NUMBER n) { unimplementedVisitor("visit(SpaceValue__NUMBER)"); return true; }
     public void endVisit(SpaceValue__NUMBER n) { unimplementedVisitor("endVisit(SpaceValue__NUMBER)"); }
@@ -94,11 +100,13 @@ public abstract class AbstractVisitor implements Visitor
         else if (n instanceof BoxOperator__HOV_SpaceOptionList) return visit((BoxOperator__HOV_SpaceOptionList) n);
         else if (n instanceof BoxOperator__I_SpaceOptionList) return visit((BoxOperator__I_SpaceOptionList) n);
         else if (n instanceof BoxOperator__G_GroupOptionList) return visit((BoxOperator__G_GroupOptionList) n);
+        else if (n instanceof BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList) return visit((BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList) n);
         else if (n instanceof BoxOperator__WD) return visit((BoxOperator__WD) n);
-        else if (n instanceof SpaceSymbol__vs) return visit((SpaceSymbol__vs) n);
+        else if (n instanceof SpaceSymbol__cs) return visit((SpaceSymbol__cs) n);
         else if (n instanceof SpaceSymbol__hs) return visit((SpaceSymbol__hs) n);
         else if (n instanceof SpaceSymbol__is) return visit((SpaceSymbol__is) n);
         else if (n instanceof SpaceSymbol__ts) return visit((SpaceSymbol__ts) n);
+        else if (n instanceof SpaceSymbol__vs) return visit((SpaceSymbol__vs) n);
         else if (n instanceof SpaceValue__NUMBER) return visit((SpaceValue__NUMBER) n);
         else if (n instanceof SpaceValue__IDENT) return visit((SpaceValue__IDENT) n);
         else if (n instanceof GroupOption__op_EQUAL_BoxOperator) return visit((GroupOption__op_EQUAL_BoxOperator) n);
@@ -120,11 +128,13 @@ public abstract class AbstractVisitor implements Visitor
         else if (n instanceof BoxOperator__HOV_SpaceOptionList) endVisit((BoxOperator__HOV_SpaceOptionList) n);
         else if (n instanceof BoxOperator__I_SpaceOptionList) endVisit((BoxOperator__I_SpaceOptionList) n);
         else if (n instanceof BoxOperator__G_GroupOptionList) endVisit((BoxOperator__G_GroupOptionList) n);
+        else if (n instanceof BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList) endVisit((BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList) n);
         else if (n instanceof BoxOperator__WD) endVisit((BoxOperator__WD) n);
-        else if (n instanceof SpaceSymbol__vs) endVisit((SpaceSymbol__vs) n);
+        else if (n instanceof SpaceSymbol__cs) endVisit((SpaceSymbol__cs) n);
         else if (n instanceof SpaceSymbol__hs) endVisit((SpaceSymbol__hs) n);
         else if (n instanceof SpaceSymbol__is) endVisit((SpaceSymbol__is) n);
         else if (n instanceof SpaceSymbol__ts) endVisit((SpaceSymbol__ts) n);
+        else if (n instanceof SpaceSymbol__vs) endVisit((SpaceSymbol__vs) n);
         else if (n instanceof SpaceValue__NUMBER) endVisit((SpaceValue__NUMBER) n);
         else if (n instanceof SpaceValue__IDENT) endVisit((SpaceValue__IDENT) n);
         else if (n instanceof GroupOption__op_EQUAL_BoxOperator) endVisit((GroupOption__op_EQUAL_BoxOperator) n);

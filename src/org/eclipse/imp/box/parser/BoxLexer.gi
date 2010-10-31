@@ -39,12 +39,15 @@
     I
     WD
     G
-    is
-    vs
-    hs
-    op
+	SL
+	cs
     gs
+    hs
+    is
+    op
+	sep
     ts
+    vs
 %End
 
 %Terminals
@@ -105,74 +108,6 @@
 %End
 
 %Rules
-    Token ::= 'V' 
-        /.$BeginJava
-                    makeToken($_V);
-          $EndJava
-        ./
-   
-    Token ::= 'H' 
-        /.$BeginJava
-                    makeToken($_H);
-          $EndJava
-        ./
-   
-    Token ::= 'H' 'O' 'V' 
-        /.$BeginJava
-                    makeToken($_HOV);
-          $EndJava
-        ./
-   
-    Token ::= 'H' 'V' 
-        /.$BeginJava
-                    makeToken($_HV);
-          $EndJava
-        ./
-   
-    Token ::= 'i' 's' 
-        /.$BeginJava
-                    makeToken($_is);
-          $EndJava
-        ./
-   
-    Token ::= 'h' 's'  
-        /.$BeginJava
-                    makeToken($_hs);
-          $EndJava
-        ./
-   
-    Token ::= 'v' 's' 
-        /.$BeginJava
-                    makeToken($_vs);
-          $EndJava
-        ./
-   
-    
-    Token ::= 'o' 'p' 
-        /.$BeginJava
-                    makeToken($_op);
-          $EndJava
-        ./
-        
-    
-    Token ::= 'g' 's' 
-        /.$BeginJava
-                    makeToken($_gs);
-          $EndJava
-        ./
-   
-    Token ::= 't' 's' 
-        /.$BeginJava
-                    makeToken($_ts);
-          $EndJava
-        ./
-   
-    Token ::= 'W' 'D' 
-        /.$BeginJava
-                    makeToken($_WD);
-          $EndJava
-        ./
-        
     Token ::= 'G'
         /.$BeginJava
                     makeToken($_G);
@@ -184,8 +119,91 @@
                     makeToken($_I);
           $EndJava
         ./
+
+    Token ::= 'H' 
+        /.$BeginJava
+                    makeToken($_H);
+          $EndJava
+        ./
+
+    Token ::= 'H' 'O' 'V' 
+        /.$BeginJava
+                    makeToken($_HOV);
+          $EndJava
+        ./
+
+    Token ::= 'H' 'V' 
+        /.$BeginJava
+                    makeToken($_HV);
+          $EndJava
+        ./
+
+    Token ::= 'S' 'L' 
+        /.$BeginJava
+                    makeToken($_SL);
+          $EndJava
+        ./
+
+    Token ::= 'V' 
+        /.$BeginJava
+                    makeToken($_V);
+          $EndJava
+        ./
+
+    Token ::= 'W' 'D' 
+        /.$BeginJava
+                    makeToken($_WD);
+          $EndJava
+        ./
+
+    Token ::= 'c' 's' 
+        /.$BeginJava
+                    makeToken($_cs);
+          $EndJava
+        ./
    
-    
+    Token ::= 'g' 's' 
+        /.$BeginJava
+                    makeToken($_gs);
+          $EndJava
+        ./
+   
+    Token ::= 'h' 's'  
+        /.$BeginJava
+                    makeToken($_hs);
+          $EndJava
+        ./
+   
+    Token ::= 'i' 's' 
+        /.$BeginJava
+                    makeToken($_is);
+          $EndJava
+        ./
+   
+    Token ::= 'o' 'p' 
+        /.$BeginJava
+                    makeToken($_op);
+          $EndJava
+        ./
+
+    Token ::= 's' 'e' 'p'
+        /.$BeginJava
+                    makeToken($_sep);
+          $EndJava
+        ./
+
+    Token ::= 't' 's' 
+        /.$BeginJava
+                    makeToken($_ts);
+          $EndJava
+        ./
+   
+    Token ::= 'v' 's' 
+        /.$BeginJava
+                    makeToken($_vs);
+          $EndJava
+        ./
+
     Token ::= number
         /.$BeginJava
                     makeToken($_NUMBER);

@@ -6,8 +6,8 @@ import org.eclipse.imp.parser.IParser;
 
 /**
  *<b>
- *<li>Rule 11:  BoxList ::= $Empty
- *<li>Rule 12:  BoxList ::= BoxList Box
+ *<li>Rule 12:  BoxList ::= $Empty
+ *<li>Rule 13:  BoxList ::= BoxList Box
  *</b>
  */
 public class BoxList extends AbstractASTNodeList implements IBoxList

@@ -6,8 +6,8 @@ import org.eclipse.imp.parser.IParser;
 
 /**
  *<b>
- *<li>Rule 22:  GroupOptionList ::= $Empty
- *<li>Rule 23:  GroupOptionList ::= GroupOptionList GroupOption
+ *<li>Rule 24:  GroupOptionList ::= $Empty
+ *<li>Rule 25:  GroupOptionList ::= GroupOptionList GroupOption
  *</b>
  */
 public class GroupOptionList extends AbstractASTNodeList implements IGroupOptionList

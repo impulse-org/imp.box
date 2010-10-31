@@ -48,11 +48,14 @@ public interface Visitor extends IAstVisitor
     boolean visit(BoxOperator__G_GroupOptionList n);
     void endVisit(BoxOperator__G_GroupOptionList n);
 
+    boolean visit(BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList n);
+    void endVisit(BoxOperator__SL_sep_EQUAL_STRING_SpaceOptionList n);
+
     boolean visit(BoxOperator__WD n);
     void endVisit(BoxOperator__WD n);
 
-    boolean visit(SpaceSymbol__vs n);
-    void endVisit(SpaceSymbol__vs n);
+    boolean visit(SpaceSymbol__cs n);
+    void endVisit(SpaceSymbol__cs n);
 
     boolean visit(SpaceSymbol__hs n);
     void endVisit(SpaceSymbol__hs n);
@@ -62,6 +65,9 @@ public interface Visitor extends IAstVisitor
 
     boolean visit(SpaceSymbol__ts n);
     void endVisit(SpaceSymbol__ts n);
+
+    boolean visit(SpaceSymbol__vs n);
+    void endVisit(SpaceSymbol__vs n);
 
     boolean visit(SpaceValue__NUMBER n);
     void endVisit(SpaceValue__NUMBER n);

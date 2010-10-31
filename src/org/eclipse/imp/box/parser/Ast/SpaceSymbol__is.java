@@ -6,7 +6,7 @@ import org.eclipse.imp.parser.IParser;
 
 /**
  *<b>
- *<li>Rule 17:  SpaceSymbol ::= is
+ *<li>Rule 18:  SpaceSymbol ::= is
  *</b>
  */
 public class SpaceSymbol__is extends ASTNodeToken implements ISpaceSymbol

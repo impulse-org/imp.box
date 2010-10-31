@@ -31,13 +31,14 @@ public class TokenColorer extends TokenColorerBase implements BoxParsersym,
 	public TextAttribute getColoring(IParseController controller, Object o) {
 	        IToken token= (IToken) o;
 		switch (token.getKind()) {
+        case TK_G:
 		case TK_H:
-		case TK_V:
 		case TK_HOV:
 		case TK_HV:
 		case TK_I:
+		case TK_SL:
+        case TK_V:
 		case TK_WD:
-		case TK_G:
 			return keywordAttribute;
 		default:
 			return super.getColoring(controller, token);

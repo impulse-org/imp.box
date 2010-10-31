@@ -6,8 +6,8 @@ import org.eclipse.imp.parser.IParser;
 
 /**
  *<b>
- *<li>Rule 13:  SpaceOptionList ::= $Empty
- *<li>Rule 14:  SpaceOptionList ::= SpaceOptionList SpaceOption
+ *<li>Rule 14:  SpaceOptionList ::= $Empty
+ *<li>Rule 15:  SpaceOptionList ::= SpaceOptionList SpaceOption
  *</b>
  */
 public class SpaceOptionList extends AbstractASTNodeList implements ISpaceOptionList
