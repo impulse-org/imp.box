@@ -18,10 +18,14 @@ import java.net.URL;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.imp.box.Activator;
+import org.eclipse.imp.box.interpreter.BoxInterpreter;
+import org.eclipse.imp.box.parser.BoxParseController;
 import org.eclipse.imp.box.parser.Ast.AbstractVisitor;
 import org.eclipse.imp.box.parser.Ast.Box__STRING;
 import org.eclipse.imp.box.parser.Ast.IBox;
 import org.eclipse.imp.box.parser.Ast.Visitor;
+import org.eclipse.imp.parser.IMessageHandler;
+import org.eclipse.imp.utils.NullMessageHandler;
 import org.osgi.framework.Bundle;
 import org.syntax_definition.sdf.Tools;
        
@@ -91,6 +95,40 @@ public class BoxFactory {
 	}
 
 	/**
+     * Formats a Box term. The term is parsed and then interpreted to produce
+     * formatted text.
+     * @deprecated Because this method takes a Box term as a String, it must be
+     * parsed before being interpreted, which is probably unnecessary. It would be
+     * much better to translate the target language AST directly into an IBox structure,
+     * which can be interpreted directly.
+	 */
+    @Deprecated
+    public static String box2Text(String boxString) {
+        return box2Text(boxString, new NullMessageHandler());
+    }
+
+    /**
+	 * Formats a Box term. The term is parsed and then interpreted to produce
+     * formatted text.
+	 * @deprecated Because this method takes a Box term as a String, it must be
+	 * parsed before being interpreted, which is probably unnecessary. It would be
+	 * much better to translate the target language AST directly into an IBox structure,
+	 * which can be interpreted directly.
+	 */
+	@Deprecated
+	public static String box2Text(String boxString, IMessageHandler msgHandler) {
+	    msgHandler.clearMessages();
+
+	    IBox box= BoxParseController.parseBox(boxString, msgHandler);
+
+	    msgHandler.endMessages();
+
+	    BoxInterpreter bi = new BoxInterpreter();
+
+        return bi.interpret(box);
+	}
+
+	/**
 	 * This methods calls external tools to execute the formatting of a box
 	 * term. The term is parsed and then processed to finally result in a
 	 * formatted text. TODO: this implementation may be slow due to the calling
@@ -102,8 +140,10 @@ public class BoxFactory {
 	 * @return
 	 * @throws IOException
 	 * @throws InterruptedException
+	 * @deprecated
 	 */
-	public static String box2text(String boxString) throws BoxException {
+	@Deprecated
+	public static String box2textSDF(String boxString) throws BoxException {
 	    // RMF 2/20/2008 -t in the following puts sglr in text output mode,
 	    // which is currently required for this to work on Windows.
 		String sglr = "sglr -p " + BoxParsetablePath;
@@ -114,15 +154,23 @@ public class BoxFactory {
 			InputStream output = Tools.pipeline(new String[] { sglr, pandora }, input);
 			return Tools.uncat(output);
 		} catch (IOException e) {
-			throw new BoxException(
-					"IOException while formatting", boxString, e);
+			throw new BoxException("IOException while formatting", boxString, e);
 		} catch (InterruptedException e) {
-			throw new BoxException("Formatting was interrupted", boxString,
-					e);
+			throw new BoxException("Formatting was interrupted", boxString, e);
 		}
 	}
 
 	public static String formatBox(String boxString) throws IOException, InterruptedException {
+	    return boxString; // Don't bother formatting it, for now - we don't have a pure Java Box formatter yet
+	}
+
+	/**
+	 * RMF 1 Nov 2010 - I'm guessing this formats a Box source program using some
+	 * predefined Box formatting rules.
+	 * @deprecated
+	 */
+	@Deprecated
+	public static String formatBoxSDF(String boxString) throws IOException, InterruptedException {
 		String sglr = "sglr -p " + BoxParsetablePathReflexive;
 		String boxFormat = "BoxFormatter";
 		String pandora = "pandora";
