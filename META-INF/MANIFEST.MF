@@ -6,7 +6,7 @@ Bundle-Version: 0.2.1.qualifier
 Bundle-Activator: org.eclipse.imp.box.Activator
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
-Bundle-Vendor: jurgen.vinju@gmail.com
+Bundle-Vendor: rfuhrer@watson.ibm.com
 Require-Bundle: lpg.runtime.java;bundle-version="2.0.17",
  org.eclipse.compare,
  org.eclipse.core.runtime,
@@ -16,8 +16,7 @@ Require-Bundle: lpg.runtime.java;bundle-version="2.0.17",
  org.eclipse.jface.text,
  org.eclipse.ui,
  org.eclipse.ui.console,
- org.eclipse.ui.workbench.texteditor;bundle-version="3.3.0",
- sdf_eclipse_installer
+ org.eclipse.ui.workbench.texteditor;bundle-version="3.3.0"
 Export-Package: org.eclipse.imp.box.builders,
  org.eclipse.imp.box.interpreter,
  org.eclipse.imp.box.parser,
