@@ -15,10 +15,11 @@ Require-Bundle: lpg.runtime.java;bundle-version="2.0.17",
  org.eclipse.jdt.core,
  org.eclipse.jface.text,
  org.eclipse.ui,
- org.eclipse.ui.console;bundle-version="3.5.0",
+ org.eclipse.ui.console,
  org.eclipse.ui.workbench.texteditor;bundle-version="3.3.0",
  sdf_eclipse_installer
 Export-Package: org.eclipse.imp.box.builders,
+ org.eclipse.imp.box.interpreter,
  org.eclipse.imp.box.parser,
  org.eclipse.imp.box.parser.Ast
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
