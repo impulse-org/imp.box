@@ -11,10 +11,13 @@
 package org.eclipse.imp.box.parser;
 
 import org.eclipse.imp.box.Activator;
+import org.eclipse.imp.box.parser.Ast.IBox;
+import org.eclipse.imp.parser.IMessageHandler;
 import org.eclipse.imp.parser.IParseController;
 import org.eclipse.imp.parser.SimpleLPGParseController;
 import org.eclipse.imp.services.ILanguageSyntaxProperties;
 import org.eclipse.imp.services.base.LanguageSyntaxPropertiesBase;
+import org.eclipse.imp.utils.SystemOutErrMessageHandler;
 
 public class BoxParseController extends SimpleLPGParseController implements IParseController {
     public BoxParseController() {
@@ -46,5 +49,16 @@ public class BoxParseController extends SimpleLPGParseController implements IPar
             public String getBlockCommentEnd() {
                 return null;
             } };
+    }
+
+    public static IBox parseBox(String boxString) {
+        return parseBox(boxString, new SystemOutErrMessageHandler());
+    }
+
+    public static IBox parseBox(String boxString, IMessageHandler msgHandler) {
+        BoxParseController bpc= new BoxParseController(true);
+        bpc.initialize(null, null, msgHandler);
+        IBox box= (IBox) bpc.parse(boxString, null);
+        return box;
     }
 }
