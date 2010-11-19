@@ -17,8 +17,8 @@ public class BoxException extends Exception {
 
 	private final String boxString;
 
-	public BoxException(String string, String boxString, Throwable cause) {
-		super(string, cause);
+	public BoxException(String msg, String boxString, Throwable cause) {
+		super(msg, cause);
 		this.boxString = boxString;
 	}
 
